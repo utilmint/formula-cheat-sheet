@@ -1,196 +1,958 @@
 <!DOCTYPE html>
-<html lang="en" data-theme="system">
+<html lang="en" data-theme="light">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Utilmint — Universal Formula Cheat Sheet Platform</title>
-  <meta name="description" content="The ultimate formula cheat sheet for Mathematics, Physics, Chemistry, Engineering, Finance, and Computer Science.">
-  
-  <!-- Fonts -->
-  <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
-  
-  <!-- Stylesheets -->
-  <link rel="stylesheet" href="css/variables.css">
-  <link rel="stylesheet" href="css/style.css">
-  <link rel="stylesheet" href="css/navbar.css">
-  <link rel="stylesheet" href="css/cards.css">
-  <link rel="stylesheet" href="css/buttons.css">
-  <link rel="stylesheet" href="css/forms.css">
-  <link rel="stylesheet" href="css/footer.css">
-  <link rel="stylesheet" href="css/darkmode.css">
-  <link rel="stylesheet" href="css/responsive.css">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>FormulaHub — Modern Formula & Reference Cheat Sheets</title>
+    <!-- Internal CSS Stylesheet -->
+    <style>
+        /* ==========================================================================
+           1. DESIGN SYSTEM & CSS VARIABLES
+           ========================================================================== */
+        :root {
+            /* Colors - Light Mode */
+            --primary-hue: 220;
+            --primary: hsl(var(--primary-hue), 85%, 56%);
+            --primary-hover: hsl(var(--primary-hue), 85%, 48%);
+            --primary-light: hsl(var(--primary-hue), 85%, 96%);
+            --accent: hsl(260, 85%, 62%);
+            
+            --bg-body: #f8fafc;
+            --bg-surface: #ffffff;
+            --bg-surface-glass: rgba(255, 255, 255, 0.85);
+            --bg-subtle: #f1f5f9;
+            
+            --text-main: #0f172a;
+            --text-muted: #64748b;
+            --text-inverse: #ffffff;
+            
+            --border-color: #e2e8f0;
+            --border-hover: #cbd5e1;
+            
+            /* Shadows & Elevation */
+            --shadow-sm: 0 1px 3px rgba(0,0,0,0.05), 0 1px 2px rgba(0,0,0,0.1);
+            --shadow-md: 0 4px 12px -2px rgba(0,0,0,0.08), 0 2px 6px -1px rgba(0,0,0,0.04);
+            --shadow-lg: 0 12px 24px -4px rgba(0,0,0,0.1), 0 4px 8px -2px rgba(0,0,0,0.04);
+            --shadow-glow: 0 0 20px rgba(59, 130, 246, 0.25);
+            
+            /* Layout & Spacing */
+            --radius-sm: 8px;
+            --radius-md: 12px;
+            --radius-lg: 16px;
+            --radius-full: 9999px;
+            --max-width: 1280px;
+            --nav-height: 72px;
+            
+            /* Animations */
+            --transition-fast: 0.15s ease;
+            --transition-normal: 0.25s cubic-bezier(0.4, 0, 0.2, 1);
+            --transition-slow: 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+
+        /* Dark Theme Overrides */
+        [data-theme="dark"] {
+            --bg-body: #0b0f19;
+            --bg-surface: #151c2c;
+            --bg-surface-glass: rgba(21, 28, 44, 0.85);
+            --bg-subtle: #1e293b;
+            
+            --text-main: #f8fafc;
+            --text-muted: #94a3b8;
+            
+            --border-color: #1e293b;
+            --border-hover: #334155;
+            
+            --shadow-sm: 0 1px 3px rgba(0,0,0,0.3);
+            --shadow-md: 0 4px 12px rgba(0,0,0,0.4);
+            --shadow-lg: 0 12px 24px rgba(0,0,0,0.5);
+            --shadow-glow: 0 0 25px rgba(59, 130, 246, 0.35);
+        }
+
+        /* ==========================================================================
+           2. BASE RESETS & TYPOGRAPHY
+           ========================================================================== */
+        *, *::before, *::after {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        html {
+            scroll-behavior: smooth;
+            font-size: 16px;
+        }
+
+        body {
+            font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, sans-serif;
+            background-color: var(--bg-body);
+            color: var(--text-main);
+            line-height: 1.6;
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+            transition: background-color var(--transition-normal), color var(--transition-normal);
+            -webkit-font-smoothing: antialiased;
+        }
+
+        a {
+            color: inherit;
+            text-decoration: none;
+        }
+
+        button, input {
+            font: inherit;
+            border: none;
+            outline: none;
+            background: none;
+        }
+
+        /* Container Utility */
+        .container {
+            width: 100%;
+            max-width: var(--max-width);
+            margin: 0 auto;
+            padding: 0 1.5rem;
+        }
+
+        /* ==========================================================================
+           3. NAVIGATION BAR
+           ========================================================================== */
+        .navbar {
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+            height: var(--nav-height);
+            background-color: var(--bg-surface-glass);
+            backdrop-filter: blur(12px);
+            -webkit-backdrop-filter: blur(12px);
+            border-bottom: 1px solid var(--border-color);
+            transition: background-color var(--transition-normal), border-color var(--transition-normal);
+        }
+
+        .nav-container {
+            height: 100%;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+        }
+
+        .brand-logo {
+            display: flex;
+            align-items: center;
+            gap: 0.75rem;
+            font-size: 1.25rem;
+            font-weight: 700;
+            color: var(--text-main);
+            letter-spacing: -0.02em;
+        }
+
+        .logo-icon {
+            width: 38px;
+            height: 38px;
+            background: linear-gradient(135deg, var(--primary), var(--accent));
+            border-radius: var(--radius-md);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-weight: 800;
+            box-shadow: var(--shadow-sm);
+        }
+
+        .nav-links {
+            display: flex;
+            align-items: center;
+            gap: 1.5rem;
+            list-style: none;
+        }
+
+        .nav-link {
+            font-weight: 500;
+            color: var(--text-muted);
+            transition: color var(--transition-fast);
+            padding: 0.5rem 0.25rem;
+            position: relative;
+        }
+
+        .nav-link:hover, .nav-link.active {
+            color: var(--primary);
+        }
+
+        .nav-link.active::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 100%;
+            height: 2px;
+            background-color: var(--primary);
+            border-radius: var(--radius-full);
+        }
+
+        .nav-actions {
+            display: flex;
+            align-items: center;
+            gap: 0.75rem;
+        }
+
+        .icon-btn {
+            width: 40px;
+            height: 40px;
+            border-radius: var(--radius-md);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: var(--text-muted);
+            background-color: var(--bg-subtle);
+            cursor: pointer;
+            transition: all var(--transition-fast);
+        }
+
+        .icon-btn:hover {
+            color: var(--text-main);
+            background-color: var(--border-color);
+        }
+
+        .mobile-toggle {
+            display: none;
+        }
+
+        /* ==========================================================================
+           4. HERO SECTION
+           ========================================================================== */
+        .hero {
+            padding: 5rem 0 3.5rem;
+            text-align: center;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .hero-badge {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.5rem;
+            padding: 0.35rem 1rem;
+            border-radius: var(--radius-full);
+            background-color: var(--primary-light);
+            color: var(--primary);
+            font-size: 0.875rem;
+            font-weight: 600;
+            margin-bottom: 1.5rem;
+            border: 1px solid rgba(59, 130, 246, 0.2);
+        }
+
+        [data-theme="dark"] .hero-badge {
+            background-color: rgba(59, 130, 246, 0.15);
+        }
+
+        .hero-title {
+            font-size: 3.25rem;
+            font-weight: 800;
+            line-height: 1.15;
+            letter-spacing: -0.03em;
+            margin-bottom: 1.25rem;
+            background: linear-gradient(135deg, var(--text-main) 30%, var(--text-muted));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        .hero-subtitle {
+            font-size: 1.15rem;
+            color: var(--text-muted);
+            max-width: 640px;
+            margin: 0 auto 2.5rem;
+        }
+
+        /* Hero Quick Search */
+        .search-box-large {
+            max-width: 680px;
+            margin: 0 auto;
+            position: relative;
+            background-color: var(--bg-surface);
+            border-radius: var(--radius-lg);
+            padding: 0.5rem;
+            box-shadow: var(--shadow-lg);
+            border: 1px solid var(--border-color);
+            display: flex;
+            align-items: center;
+            transition: all var(--transition-normal);
+        }
+
+        .search-box-large:focus-within {
+            border-color: var(--primary);
+            box-shadow: var(--shadow-glow);
+        }
+
+        .search-icon {
+            padding: 0 0.75rem 0 1rem;
+            color: var(--text-muted);
+            display: flex;
+            align-items: center;
+        }
+
+        .search-input-large {
+            width: 100%;
+            padding: 0.75rem 0.5rem;
+            font-size: 1.05rem;
+            color: var(--text-main);
+        }
+
+        .search-btn {
+            background-color: var(--primary);
+            color: var(--text-inverse);
+            padding: 0.75rem 1.5rem;
+            border-radius: var(--radius-md);
+            font-weight: 600;
+            cursor: pointer;
+            transition: background-color var(--transition-fast);
+            white-space: nowrap;
+        }
+
+        .search-btn:hover {
+            background-color: var(--primary-hover);
+        }
+
+        /* Quick Stats Bar */
+        .stats-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 1.5rem;
+            margin-top: 3.5rem;
+            padding-top: 2.5rem;
+            border-top: 1px solid var(--border-color);
+        }
+
+        .stat-item {
+            text-align: center;
+        }
+
+        .stat-number {
+            font-size: 2rem;
+            font-weight: 800;
+            color: var(--text-main);
+        }
+
+        .stat-label {
+            font-size: 0.875rem;
+            color: var(--text-muted);
+            font-weight: 500;
+        }
+
+        /* ==========================================================================
+           5. SECTION LAYOUTS & CARDS
+           ========================================================================== */
+        .section {
+            padding: 4rem 0;
+        }
+
+        .section-header {
+            display: flex;
+            align-items: flex-end;
+            justify-content: space-between;
+            margin-bottom: 2rem;
+        }
+
+        .section-title {
+            font-size: 1.75rem;
+            font-weight: 700;
+            letter-spacing: -0.02em;
+        }
+
+        .section-subtitle {
+            font-size: 0.95rem;
+            color: var(--text-muted);
+            margin-top: 0.25rem;
+        }
+
+        .view-all-link {
+            color: var(--primary);
+            font-weight: 600;
+            font-size: 0.95rem;
+            display: flex;
+            align-items: center;
+            gap: 0.35rem;
+            transition: gap var(--transition-fast);
+        }
+
+        .view-all-link:hover {
+            gap: 0.6rem;
+        }
+
+        /* Cards Grid */
+        .grid-cards {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+            gap: 1.5rem;
+        }
+
+        .card {
+            background-color: var(--bg-surface);
+            border: 1px solid var(--border-color);
+            border-radius: var(--radius-lg);
+            padding: 1.5rem;
+            transition: all var(--transition-normal);
+            display: flex;
+            flex-direction: column;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .card:hover {
+            transform: translateY(-4px);
+            box-shadow: var(--shadow-md);
+            border-color: var(--border-hover);
+        }
+
+        .card-icon {
+            width: 48px;
+            height: 48px;
+            border-radius: var(--radius-md);
+            background-color: var(--bg-subtle);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.5rem;
+            margin-bottom: 1.25rem;
+            color: var(--primary);
+        }
+
+        .card-title {
+            font-size: 1.2rem;
+            font-weight: 700;
+            margin-bottom: 0.5rem;
+        }
+
+        .card-desc {
+            font-size: 0.9rem;
+            color: var(--text-muted);
+            margin-bottom: 1.25rem;
+            flex-grow: 1;
+        }
+
+        .card-meta {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            font-size: 0.85rem;
+            color: var(--text-muted);
+            font-weight: 500;
+            padding-top: 1rem;
+            border-top: 1px solid var(--border-color);
+        }
+
+        /* Formula Card Specific */
+        .formula-card {
+            border-left: 4px solid var(--primary);
+        }
+
+        .formula-preview {
+            background-color: var(--bg-subtle);
+            padding: 1rem;
+            border-radius: var(--radius-md);
+            text-align: center;
+            font-family: 'Courier New', Courier, monospace;
+            font-size: 1.1rem;
+            font-weight: 700;
+            margin: 1rem 0;
+            color: var(--text-main);
+        }
+
+        /* Tools Grid */
+        .tools-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+            gap: 1.5rem;
+        }
+
+        .tool-card {
+            display: flex;
+            align-items: flex-start;
+            gap: 1.25rem;
+        }
+
+        /* ==========================================================================
+           6. FOOTER
+           ========================================================================== */
+        .footer {
+            background-color: var(--bg-surface);
+            border-top: 1px solid var(--border-color);
+            padding: 4rem 0 2rem;
+            margin-top: auto;
+            transition: background-color var(--transition-normal);
+        }
+
+        .footer-grid {
+            display: grid;
+            grid-template-columns: 2fr repeat(3, 1fr);
+            gap: 3rem;
+            margin-bottom: 3rem;
+        }
+
+        .footer-brand p {
+            color: var(--text-muted);
+            font-size: 0.9rem;
+            margin-top: 1rem;
+            max-width: 300px;
+        }
+
+        .footer-column-title {
+            font-size: 0.95rem;
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 0.05em;
+            margin-bottom: 1.25rem;
+        }
+
+        .footer-links {
+            list-style: none;
+            display: flex;
+            flex-direction: column;
+            gap: 0.75rem;
+        }
+
+        .footer-link {
+            color: var(--text-muted);
+            font-size: 0.9rem;
+            transition: color var(--transition-fast);
+        }
+
+        .footer-link:hover {
+            color: var(--primary);
+        }
+
+        .footer-bottom {
+            padding-top: 2rem;
+            border-top: 1px solid var(--border-color);
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            font-size: 0.875rem;
+            color: var(--text-muted);
+        }
+
+        /* ==========================================================================
+           7. RESPONSIVE MEDIA QUERIES
+           ========================================================================== */
+        @media (max-width: 992px) {
+            .footer-grid {
+                grid-template-columns: 1fr 1fr;
+                gap: 2rem;
+            }
+        }
+
+        @media (max-width: 768px) {
+            .hero-title {
+                font-size: 2.25rem;
+            }
+            
+            .nav-links {
+                position: fixed;
+                top: var(--nav-height);
+                left: 0;
+                right: 0;
+                background-color: var(--bg-surface);
+                border-bottom: 1px solid var(--border-color);
+                flex-direction: column;
+                padding: 1.5rem;
+                gap: 1rem;
+                display: none;
+                box-shadow: var(--shadow-lg);
+            }
+
+            .nav-links.is-active {
+                display: flex;
+            }
+
+            .mobile-toggle {
+                display: flex;
+            }
+
+            .search-box-large {
+                flex-direction: column;
+                gap: 0.5rem;
+                padding: 0.5rem;
+            }
+
+            .search-btn {
+                width: 100%;
+            }
+
+            .stats-grid {
+                grid-template-columns: repeat(2, 1fr);
+            }
+        }
+
+        @media (max-width: 480px) {
+            .footer-grid {
+                grid-template-columns: 1fr;
+            }
+            .footer-bottom {
+                flex-direction: column;
+                gap: 1rem;
+                text-align: center;
+            }
+            .stats-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
 </head>
 <body>
 
-  <!-- Sticky Top Navbar -->
-  <header class="navbar-wrapper">
+    <!-- ==========================================================================
+       NAVIGATION BAR
+       ========================================================================== -->
     <nav class="navbar" aria-label="Main Navigation">
-      <a href="index.html" class="brand">
-        <span class="brand-logo">⚡</span>
-        <span class="brand-name">Utilmint</span>
-      </a>
+        <div class="container nav-container">
+            <a href="index.html" class="brand-logo" aria-label="FormulaHub Home">
+                <div class="logo-icon">ƒx</div>
+                <span>FormulaHub</span>
+            </a>
 
-      <div class="nav-menu" id="navMenu">
-        <a href="index.html" class="nav-link active">Home</a>
-        <a href="subjects.html" class="nav-link">Subjects</a>
-        <a href="search.html" class="nav-link">Search</a>
-        <a href="calculators.html" class="nav-link">Calculators</a>
-        <a href="converter.html" class="nav-link">Converter</a>
-        <a href="constants.html" class="nav-link">Constants</a>
-        <a href="symbols.html" class="nav-link">Symbols</a>
-        <a href="favorites.html" class="nav-link">Favorites</a>
-      </div>
+            <!-- Navigation Links -->
+            <ul class="nav-links" id="navLinks">
+                <li><a href="index.html" class="nav-link active">Home</a></li>
+                <li><a href="subjects.html" class="nav-link">Subjects</a></li>
+                <li><a href="calculators.html" class="nav-link">Calculators</a></li>
+                <li><a href="converter.html" class="nav-link">Converter</a></li>
+                <li><a href="constants.html" class="nav-link">Constants</a></li>
+                <li><a href="symbols.html" class="nav-link">Symbols</a></li>
+            </ul>
 
-      <div class="nav-actions">
-        <button id="themeToggleBtn" class="btn-icon" aria-label="Toggle Theme">
-          <span class="theme-icon">🌙</span>
-        </button>
-        <button class="hamburger-menu" id="hamburgerBtn" aria-label="Toggle Navigation Menu">
-          <span></span>
-          <span></span>
-          <span></span>
-        </button>
-      </div>
+            <!-- Header Action Controls -->
+            <div class="nav-actions">
+                <!-- Theme Toggle Button -->
+                <button class="icon-btn" id="themeToggleBtn" aria-label="Toggle Theme" title="Toggle Dark/Light Mode">
+                    <svg id="sunIcon" width="20" height="20" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M12 3v1m0 16v1m9-9h-1M4 12H3m15.364 6.364l-.707-.707M6.343 6.343l-.707-.707m12.728 0l-.707.707M6.343 17.657l-.707.707M16 12a4 4 0 11-8 0 4 4 0 018 0z"></path></svg>
+                    <svg id="moonIcon" width="20" height="20" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24" style="display:none;"><path d="M20.354 15.354A9 9 0 018.646 3.646 9.003 9.003 0 0012 21a9.003 9.003 0 008.354-5.646z"></path></svg>
+                </button>
+
+                <!-- Search Link Button -->
+                <a href="search.html" class="icon-btn" aria-label="Search Formulas">
+                    <svg width="20" height="20" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"></path></svg>
+                </a>
+
+                <!-- Mobile Navigation Toggle -->
+                <button class="icon-btn mobile-toggle" id="mobileMenuBtn" aria-label="Toggle Navigation Menu">
+                    <svg width="20" height="20" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M4 6h16M4 12h16M4 18h16"></path></svg>
+                </button>
+            </div>
+        </div>
     </nav>
-  </header>
 
-  <!-- Main Content Container -->
-  <main id="main-content">
-    
-    <!-- Hero Section -->
-    <section class="hero-section">
-      <div class="container hero-content">
-        <span class="badge badge-primary">Phase 1 — Framework Ready</span>
-        <h1 class="hero-title">The Universal Formula Engine</h1>
-        <p class="hero-subtitle">Instant access to thousands of formulas across Science, Engineering, Mathematics, and Finance.</p>
+    <!-- ==========================================================================
+       MAIN CONTENT
+       ========================================================================== -->
+    <main>
 
-        <!-- Search Bar Component -->
-        <form action="search.html" method="GET" class="hero-search-form">
-          <div class="search-input-wrapper">
-            <span class="search-icon">🔍</span>
-            <input type="search" name="q" placeholder="Search formulas, variables, topics, or subjects..." autocomplete="off">
-            <button type="submit" class="btn btn-primary">Search</button>
-          </div>
-        </form>
+        <!-- HERO SECTION -->
+        <section class="hero">
+            <div class="container">
+                <div class="hero-badge">
+                    <span>✨ Instant STEM Reference Engine</span>
+                </div>
+                <h1 class="hero-title">All Your Formulas.<br>One Clean Reference Sheet.</h1>
+                <p class="hero-subtitle">
+                    A minimal, modern interactive hub for formulas, constants, equations, and unit conversion tools tailored for students, engineers, and scientists.
+                </p>
 
-        <div class="quick-tags">
-          <span>Popular:</span>
-          <a href="search.html?q=Quadratic" class="tag">Quadratic Formula</a>
-          <a href="search.html?q=Thermodynamics" class="tag">Thermodynamics</a>
-          <a href="search.html?q=Ohm's Law" class="tag">Ohm's Law</a>
-          <a href="search.html?q=Integration" class="tag">Integration</a>
+                <!-- Quick Search Input -->
+                <form action="search.html" method="GET" class="search-box-large">
+                    <div class="search-icon">
+                        <svg width="22" height="22" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"></path></svg>
+                    </div>
+                    <input type="text" name="q" class="search-input-large" placeholder="Search formulas, concepts, or constants (e.g. Quadratic, Ohm's Law...)" required>
+                    <button type="submit" class="search-btn">Search Hub</button>
+                </form>
+
+                <!-- Platform Quick Statistics -->
+                <div class="stats-grid">
+                    <div class="stat-item">
+                        <div class="stat-number">12+</div>
+                        <div class="stat-label">Core Subjects</div>
+                    </div>
+                    <div class="stat-item">
+                        <div class="stat-number">500+</div>
+                        <div class="stat-label">Curated Formulas</div>
+                    </div>
+                    <div class="stat-item">
+                        <div class="stat-number">50+</div>
+                        <div class="stat-label">Scientific Constants</div>
+                    </div>
+                    <div class="stat-item">
+                        <div class="stat-number">100%</div>
+                        <div class="stat-label">Free & Offline Ready</div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- SUBJECTS SECTION -->
+        <section class="section">
+            <div class="container">
+                <div class="section-header">
+                    <div>
+                        <h2 class="section-title">Explore Subjects</h2>
+                        <p class="section-subtitle">Browse formulas categorized by scientific discipline</p>
+                    </div>
+                    <a href="subjects.html" class="view-all-link">
+                        View All Subjects
+                        <svg width="16" height="16" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M9 5l7 7-7 7"></path></svg>
+                    </a>
+                </div>
+
+                <!-- Subjects Cards Grid Placeholder -->
+                <div class="grid-cards">
+                    <!-- Subject Card 1 -->
+                    <a href="subject-details.html?subject=mathematics" class="card">
+                        <div class="card-icon">∑</div>
+                        <h3 class="card-title">Mathematics</h3>
+                        <p class="card-desc">Algebra, Calculus, Geometry, Trigonometry, and Probability equations.</p>
+                        <div class="card-meta">
+                            <span>15 Topics</span>
+                            <span>→</span>
+                        </div>
+                    </a>
+
+                    <!-- Subject Card 2 -->
+                    <a href="subject-details.html?subject=physics" class="card">
+                        <div class="card-icon">⚛</div>
+                        <h3 class="card-title">Physics</h3>
+                        <p class="card-desc">Classical Mechanics, Electromagnetism, Thermodynamics, and Quantum Physics.</p>
+                        <div class="card-meta">
+                            <span>12 Topics</span>
+                            <span>→</span>
+                        </div>
+                    </a>
+
+                    <!-- Subject Card 3 -->
+                    <a href="subject-details.html?subject=chemistry" class="card">
+                        <div class="card-icon">🧪</div>
+                        <h3 class="card-title">Chemistry</h3>
+                        <p class="card-desc">Stoichiometry, Thermochemistry, Kinetics, and Organic Reactions.</p>
+                        <div class="card-meta">
+                            <span>10 Topics</span>
+                            <span>→</span>
+                        </div>
+                    </a>
+
+                    <!-- Subject Card 4 -->
+                    <a href="subject-details.html?subject=engineering" class="card">
+                        <div class="card-icon">⚙</div>
+                        <h3 class="card-title">Engineering</h3>
+                        <p class="card-desc">Circuit Theory, Statics, Dynamics, Fluid Mechanics, and Signal Processing.</p>
+                        <div class="card-meta">
+                            <span>18 Topics</span>
+                            <span>→</span>
+                        </div>
+                    </a>
+                </div>
+            </div>
+        </section>
+
+        <!-- FEATURED FORMULAS SECTION -->
+        <section class="section" style="background-color: var(--bg-subtle);">
+            <div class="container">
+                <div class="section-header">
+                    <div>
+                        <h2 class="section-title">Popular Formulas</h2>
+                        <p class="section-subtitle">Frequently referenced formulas and equations</p>
+                    </div>
+                    <a href="recent.html" class="view-all-link">
+                        Recently Added
+                        <svg width="16" height="16" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M9 5l7 7-7 7"></path></svg>
+                    </a>
+                </div>
+
+                <!-- Popular Formulas Grid -->
+                <div class="grid-cards">
+                    <!-- Formula Card 1 -->
+                    <div class="card formula-card">
+                        <h3 class="card-title">Quadratic Formula</h3>
+                        <p class="card-desc">Solutions to a second-degree polynomial equation.</p>
+                        <div class="formula-preview">
+                            x = [-b ± √(b² - 4ac)] / 2a
+                        </div>
+                        <div class="card-meta">
+                            <span>Algebra</span>
+                            <a href="subject-details.html?topic=quadratic" class="view-all-link">Details</a>
+                        </div>
+                    </div>
+
+                    <!-- Formula Card 2 -->
+                    <div class="card formula-card">
+                        <h3 class="card-title">Mass-Energy Equivalence</h3>
+                        <p class="card-desc">Fundamental relationship between mass and energy.</p>
+                        <div class="formula-preview">
+                            E = m · c²
+                        </div>
+                        <div class="card-meta">
+                            <span>Physics</span>
+                            <a href="subject-details.html?topic=relativity" class="view-all-link">Details</a>
+                        </div>
+                    </div>
+
+                    <!-- Formula Card 3 -->
+                    <div class="card formula-card">
+                        <h3 class="card-title">Ohm's Law</h3>
+                        <p class="card-desc">Relationship between voltage, current, and resistance.</p>
+                        <div class="formula-preview">
+                            V = I · R
+                        </div>
+                        <div class="card-meta">
+                            <span>Electronics</span>
+                            <a href="subject-details.html?topic=ohms-law" class="view-all-link">Details</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- INTERACTIVE TOOLS SECTION -->
+        <section class="section">
+            <div class="container">
+                <div class="section-header">
+                    <div>
+                        <h2 class="section-title">Interactive Utilities</h2>
+                        <p class="section-subtitle">Perform instant calculations and unit conversions</p>
+                    </div>
+                </div>
+
+                <!-- Interactive Utilities Grid -->
+                <div class="tools-grid">
+                    <!-- Tool Card 1 -->
+                    <a href="calculators.html" class="card tool-card">
+                        <div class="card-icon">🧮</div>
+                        <div>
+                            <h3 class="card-title">Formula Calculators</h3>
+                            <p class="card-desc">Input variables and solve equations instantly with automated computation engines.</p>
+                        </div>
+                    </a>
+
+                    <!-- Tool Card 2 -->
+                    <a href="converter.html" class="card tool-card">
+                        <div class="card-icon">🔄</div>
+                        <div>
+                            <h3 class="card-title">Unit Converter</h3>
+                            <p class="card-desc">Convert between SI, Imperial, and engineering units seamlessly across categories.</p>
+                        </div>
+                    </a>
+                </div>
+            </div>
+        </section>
+
+    </main>
+
+    <!-- ==========================================================================
+       FOOTER SECTION
+       ========================================================================== -->
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-grid">
+                <!-- Brand Info -->
+                <div class="footer-brand">
+                    <a href="index.html" class="brand-logo">
+                        <div class="logo-icon">ƒx</div>
+                        <span>FormulaHub</span>
+                    </a>
+                    <p>A comprehensive, lightweight, open-source formula reference system designed for high performance and accessibility.</p>
+                </div>
+
+                <!-- Navigation Column 1 -->
+                <div>
+                    <h4 class="footer-column-title">Reference</h4>
+                    <ul class="footer-links">
+                        <li><a href="subjects.html" class="footer-link">All Subjects</a></li>
+                        <li><a href="constants.html" class="footer-link">Physical Constants</a></li>
+                        <li><a href="symbols.html" class="footer-link">Greek Symbols</a></li>
+                        <li><a href="favorites.html" class="footer-link">Saved Formulas</a></li>
+                    </ul>
+                </div>
+
+                <!-- Navigation Column 2 -->
+                <div>
+                    <h4 class="footer-column-title">Tools</h4>
+                    <ul class="footer-links">
+                        <li><a href="calculators.html" class="footer-link">Calculators</a></li>
+                        <li><a href="converter.html" class="footer-link">Unit Converter</a></li>
+                        <li><a href="search.html" class="footer-link">Advanced Search</a></li>
+                        <li><a href="recent.html" class="footer-link">Recent Updates</a></li>
+                    </ul>
+                </div>
+
+                <!-- Navigation Column 3 -->
+                <div>
+                    <h4 class="footer-column-title">Platform</h4>
+                    <ul class="footer-links">
+                        <li><a href="about.html" class="footer-link">About Project</a></li>
+                        <li><a href="contact.html" class="footer-link">Contact & Feedback</a></li>
+                        <li><a href="settings.html" class="footer-link">Preferences</a></li>
+                        <li><a href="privacy.html" class="footer-link">Privacy Policy</a></li>
+                        <li><a href="terms.html" class="footer-link">Terms of Use</a></li>
+                    </ul>
+                </div>
+            </div>
+
+            <!-- Footer Bottom Bar -->
+            <div class="footer-bottom">
+                <p>&copy; 2026 FormulaHub. Built with Vanilla Web Standards.</p>
+                <p>Designed for speed, clarity, and precision.</p>
+            </div>
         </div>
-      </div>
-    </section>
+    </footer>
 
-    <!-- Formula of the Day Placeholder -->
-    <section class="section-padding container">
-      <div class="card card-featured">
-        <div class="card-header-flex">
-          <span class="badge badge-accent">Formula of the Day</span>
-          <span class="text-muted text-sm">Updated Daily</span>
-        </div>
-        <div class="card-body">
-          <h3 class="card-title">Euler's Identity Placeholder</h3>
-          <div class="formula-preview-box">
-            <code>e^(iπ) + 1 = 0</code>
-          </div>
-          <p class="text-muted">Connecting five fundamental mathematical constants in one single equation.</p>
-        </div>
-        <div class="card-footer">
-          <a href="subject-detail.html?id=math" class="btn btn-secondary btn-sm">Explore Mathematics</a>
-        </div>
-      </div>
-    </section>
+    <!-- ==========================================================================
+       JAVASCRIPT LOGIC
+       ========================================================================== -->
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            // Dark / Light Theme Toggle State Handler
+            const themeToggleBtn = document.getElementById('themeToggleBtn');
+            const sunIcon = document.getElementById('sunIcon');
+            const moonIcon = document.getElementById('moonIcon');
+            const htmlElement = document.documentElement;
 
-    <!-- Popular Subjects Grid -->
-    <section class="section-padding bg-subtle">
-      <div class="container">
-        <div class="section-header">
-          <h2>Browse Popular Subjects</h2>
-          <a href="subjects.html" class="link-primary">View All Subjects →</a>
-        </div>
+            // Load saved theme preference or system default
+            const savedTheme = localStorage.getItem('formulahub_theme');
+            const systemPrefersDark = window.matchMedia('(prefers-color-scheme: dark)').matches;
+            
+            const currentTheme = savedTheme || (systemPrefersDark ? 'dark' : 'light');
+            applyTheme(currentTheme);
 
-        <div class="grid grid-3" id="popularSubjectsGrid">
-          <!-- Dynamic JS subject cards render here -->
-          <div class="skeleton-card"></div>
-          <div class="skeleton-card"></div>
-          <div class="skeleton-card"></div>
-        </div>
-      </div>
-    </section>
+            themeToggleBtn.addEventListener('click', () => {
+                const activeTheme = htmlElement.getAttribute('data-theme');
+                const newTheme = activeTheme === 'dark' ? 'light' : 'dark';
+                applyTheme(newTheme);
+            });
 
-    <!-- Statistics Section -->
-    <section class="section-padding container">
-      <div class="grid grid-4 text-center">
-        <div class="stat-card">
-          <h3 class="stat-number">12+</h3>
-          <p class="stat-label">Core Fields</p>
-        </div>
-        <div class="stat-card">
-          <h3 class="stat-number">100%</h3>
-          <p class="stat-label">Offline Ready</p>
-        </div>
-        <div class="stat-card">
-          <h3 class="stat-number">0ms</h3>
-          <p class="stat-label">Backend Latency</p>
-        </div>
-        <div class="stat-card">
-          <h3 class="stat-number">⚡</h3>
-          <p class="stat-label">Client-Side Search</p>
-        </div>
-      </div>
-    </section>
-  </main>
+            function applyTheme(theme) {
+                htmlElement.setAttribute('data-theme', theme);
+                localStorage.setItem('formulahub_theme', theme);
 
-  <!-- Global Footer -->
-  <footer class="footer">
-    <div class="container footer-grid">
-      <div class="footer-brand">
-        <a href="index.html" class="brand">⚡ Utilmint</a>
-        <p class="text-sm text-muted">The ultimate multi-subject formula cheat sheet engine built for speed, scale, and accessibility.</p>
-      </div>
+                if (theme === 'dark') {
+                    sunIcon.style.display = 'none';
+                    moonIcon.style.display = 'block';
+                } else {
+                    sunIcon.style.display = 'block';
+                    moonIcon.style.display = 'none';
+                }
+            }
 
-      <div class="footer-col">
-        <h4>Navigation</h4>
-        <ul>
-          <li><a href="subjects.html">Subjects</a></li>
-          <li><a href="calculators.html">Calculators</a></li>
-          <li><a href="converter.html">Unit Converter</a></li>
-          <li><a href="constants.html">Constants</a></li>
-        </ul>
-      </div>
+            // Mobile Navigation Menu Toggle Handler
+            const mobileMenuBtn = document.getElementById('mobileMenuBtn');
+            const navLinks = document.getElementById('navLinks');
 
-      <div class="footer-col">
-        <h4>Tools</h4>
-        <ul>
-          <li><a href="symbols.html">Symbols Dictionary</a></li>
-          <li><a href="favorites.html">Favorites</a></li>
-          <li><a href="recent.html">Recent History</a></li>
-          <li><a href="search.html">Advanced Search</a></li>
-        </ul>
-      </div>
+            mobileMenuBtn.addEventListener('click', () => {
+                navLinks.classList.toggle('is-active');
+            });
 
-      <div class="footer-col">
-        <h4>Legal & Project</h4>
-        <ul>
-          <li><a href="about.html">About Utilmint</a></li>
-          <li><a href="contact.html">Contact Us</a></li>
-          <li><a href="privacy.html">Privacy Policy</a></li>
-          <li><a href="terms.html">Terms of Service</a></li>
-        </ul>
-      </div>
-    </div>
-
-    <div class="footer-bottom container">
-      <p class="text-sm text-muted">&copy; 2026 Utilmint. Phase 1 Architecture. All Rights Reserved.</p>
-      <span class="text-sm text-muted">Version 1.0.0-p1</span>
-    </div>
-  </footer>
-
-  <!-- Core JavaScript Modules -->
-  <script type="module" src="js/app.js"></script>
+            // Close mobile menu on click outside
+            document.addEventListener('click', (event) => {
+                if (!event.target.closest('.navbar')) {
+                    navLinks.classList.remove('is-active');
+                }
+            });
+        });
+    </script>
 </body>
 </html>

@@ -250,7 +250,7 @@
         .page-subtitle {
             font-size: 1.05rem;
             color: var(--text-muted);
-            max-width: 600px;
+            max-width: 680px;
         }
 
         /* Filter Controls Bar */
@@ -295,7 +295,7 @@
 
         .filter-search {
             position: relative;
-            min-width: 260px;
+            min-width: 280px;
         }
 
         .filter-search input {
@@ -370,7 +370,7 @@
             display: flex;
             align-items: center;
             justify-content: center;
-            font-size: 1.75rem;
+            font-size: 1.5rem;
             font-weight: 700;
         }
 
@@ -390,16 +390,16 @@
         }
 
         .subject-title {
-            font-size: 1.35rem;
+            font-size: 1.25rem;
             font-weight: 700;
             margin-bottom: 0.5rem;
             color: var(--text-main);
         }
 
         .subject-desc {
-            font-size: 0.925rem;
+            font-size: 0.9rem;
             color: var(--text-muted);
-            margin-bottom: 1.5rem;
+            margin-bottom: 1.25rem;
             line-height: 1.5;
             flex-grow: 1;
         }
@@ -409,14 +409,14 @@
             display: flex;
             flex-wrap: wrap;
             gap: 0.4rem;
-            margin-bottom: 1.5rem;
+            margin-bottom: 1.25rem;
         }
 
         .topic-tag {
             background-color: var(--bg-subtle);
             color: var(--text-muted);
-            font-size: 0.775rem;
-            padding: 0.2rem 0.6rem;
+            font-size: 0.75rem;
+            padding: 0.2rem 0.55rem;
             border-radius: var(--radius-sm);
             font-weight: 500;
         }
@@ -640,23 +640,23 @@
                 <span>/</span>
                 <span style="color: var(--text-main);">Subjects</span>
             </div>
-            <h1 class="page-title">Formula Subjects</h1>
-            <p class="page-subtitle">Select a subject area to explore comprehensive cheat sheets, formulas, derivations, and examples.</p>
+            <h1 class="page-title">31 Formula Domains</h1>
+            <p class="page-subtitle">Select a subject area to explore comprehensive cheat sheets, core formulas, equations, and interactive models.</p>
 
             <!-- Interactive Filter Controls -->
             <div class="filter-bar">
                 <div class="category-pills" id="categoryPills">
-                    <button class="pill-btn active" data-filter="all">All Fields</button>
-                    <button class="pill-btn" data-filter="math">Mathematics</button>
-                    <button class="pill-btn" data-filter="physics">Physics</button>
-                    <button class="pill-btn" data-filter="chemistry">Chemistry</button>
+                    <button class="pill-btn active" data-filter="all">All Domains</button>
+                    <button class="pill-btn" data-filter="sciences">Basic Sciences</button>
                     <button class="pill-btn" data-filter="engineering">Engineering</button>
-                    <button class="pill-btn" data-filter="cs">Computer Science</button>
+                    <button class="pill-btn" data-filter="tech">Tech & AI</button>
+                    <button class="pill-btn" data-filter="business">Business & Social</button>
+                    <button class="pill-btn" data-filter="applied">Applied Sciences</button>
                 </div>
 
                 <div class="filter-search">
                     <svg width="16" height="16" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"></path></svg>
-                    <input type="text" id="subjectSearchInput" placeholder="Filter subjects..." aria-label="Filter subjects">
+                    <input type="text" id="subjectSearchInput" placeholder="Search 31 subjects..." aria-label="Search subjects">
                 </div>
             </div>
         </div>
@@ -669,14 +669,14 @@
         <div class="container">
             <div class="subjects-grid" id="subjectsGrid">
 
-                <!-- Subject 1: Mathematics -->
-                <a href="subject-details.html?subject=mathematics" class="subject-card" data-category="math" data-title="mathematics math calculus algebra geometry trigonometry">
+                <!-- 1. Mathematics -->
+                <a href="subject-details.html?subject=mathematics" class="subject-card" data-category="sciences" data-title="mathematics math calculus algebra geometry trigonometry linear differential">
                     <div class="card-header-row">
                         <div class="subject-icon">∑</div>
-                        <span class="badge">Math</span>
+                        <span class="badge">Science</span>
                     </div>
                     <h2 class="subject-title">Mathematics</h2>
-                    <p class="subject-desc">Foundational and advanced mathematical formulas covering algebra, calculus, vectors, and linear systems.</p>
+                    <p class="subject-desc">Foundational and advanced mathematics covering algebra, single/multivariable calculus, geometry, and linear systems.</p>
                     <ul class="topic-list">
                         <li class="topic-tag">Algebra</li>
                         <li class="topic-tag">Calculus</li>
@@ -684,39 +684,39 @@
                         <li class="topic-tag">Geometry</li>
                     </ul>
                     <div class="subject-footer">
-                        <span>15 Topics</span>
-                        <span>Explore →</span>
+                        <span>Explore Topic</span>
+                        <span>→</span>
                     </div>
                 </a>
 
-                <!-- Subject 2: Physics -->
-                <a href="subject-details.html?subject=physics" class="subject-card" data-category="physics" data-title="physics mechanics thermodynamics electromagnetism optics quantum">
+                <!-- 2. Physics -->
+                <a href="subject-details.html?subject=physics" class="subject-card" data-category="sciences" data-title="physics mechanics thermodynamics electromagnetism optics quantum relativity">
                     <div class="card-header-row">
                         <div class="subject-icon">⚛</div>
-                        <span class="badge">Physics</span>
+                        <span class="badge">Science</span>
                     </div>
                     <h2 class="subject-title">Physics</h2>
-                    <p class="subject-desc">Laws of physics, classical mechanics, wave dynamics, electromagnetism, and modern quantum theory.</p>
+                    <p class="subject-desc">Laws of classical mechanics, wave dynamics, electromagnetism, thermodynamics, optics, and quantum mechanics.</p>
                     <ul class="topic-list">
                         <li class="topic-tag">Mechanics</li>
                         <li class="topic-tag">E&M</li>
                         <li class="topic-tag">Thermodynamics</li>
-                        <li class="topic-tag">Optics</li>
+                        <li class="topic-tag">Quantum</li>
                     </ul>
                     <div class="subject-footer">
-                        <span>12 Topics</span>
-                        <span>Explore →</span>
+                        <span>Explore Topic</span>
+                        <span>→</span>
                     </div>
                 </a>
 
-                <!-- Subject 3: Chemistry -->
-                <a href="subject-details.html?subject=chemistry" class="subject-card" data-category="chemistry" data-title="chemistry stoichiometry kinetics thermodynamics organic acid base">
+                <!-- 3. Chemistry -->
+                <a href="subject-details.html?subject=chemistry" class="subject-card" data-category="sciences" data-title="chemistry stoichiometry kinetics thermodynamics organic inorganic equilibrium">
                     <div class="card-header-row">
                         <div class="subject-icon">🧪</div>
-                        <span class="badge">Chemistry</span>
+                        <span class="badge">Science</span>
                     </div>
                     <h2 class="subject-title">Chemistry</h2>
-                    <p class="subject-desc">Chemical reactions, stoichiometry, gas laws, chemical equilibrium, thermochemistry, and solutions.</p>
+                    <p class="subject-desc">Chemical reaction equations, stoichiometry, gas laws, reaction kinetics, chemical equilibrium, and thermochemistry.</p>
                     <ul class="topic-list">
                         <li class="topic-tag">Stoichiometry</li>
                         <li class="topic-tag">Gas Laws</li>
@@ -724,108 +724,568 @@
                         <li class="topic-tag">Acids & Bases</li>
                     </ul>
                     <div class="subject-footer">
-                        <span>10 Topics</span>
-                        <span>Explore →</span>
+                        <span>Explore Topic</span>
+                        <span>→</span>
                     </div>
                 </a>
 
-                <!-- Subject 4: Electrical Engineering -->
-                <a href="subject-details.html?subject=electrical" class="subject-card" data-category="engineering" data-title="electrical engineering circuits ohms law signals power electronics">
+                <!-- 4. Biology -->
+                <a href="subject-details.html?subject=biology" class="subject-card" data-category="sciences" data-title="biology genetics ecology cell molecular enzyme population metabolism">
+                    <div class="card-header-row">
+                        <div class="subject-icon">🧬</div>
+                        <span class="badge">Science</span>
+                    </div>
+                    <h2 class="subject-title">Biology</h2>
+                    <p class="subject-desc">Enzyme kinetics, population genetics, cellular respiration energetics, ecology growth dynamics, and molecular bio.</p>
+                    <ul class="topic-list">
+                        <li class="topic-tag">Enzymes</li>
+                        <li class="topic-tag">Genetics</li>
+                        <li class="topic-tag">Ecology</li>
+                        <li class="topic-tag">Cellular</li>
+                    </ul>
+                    <div class="subject-footer">
+                        <span>Explore Topic</span>
+                        <span>→</span>
+                    </div>
+                </a>
+
+                <!-- 5. Medicine & Health Sciences -->
+                <a href="subject-details.html?subject=medicine" class="subject-card" data-category="applied" data-title="medicine health pharmacology dosage clearance cardiac output epidemiology physiology">
+                    <div class="card-header-row">
+                        <div class="subject-icon">🩺</div>
+                        <span class="badge">Applied</span>
+                    </div>
+                    <h2 class="subject-title">Medicine & Health Sciences</h2>
+                    <p class="subject-desc">Pharmacokinetics, drug dosage calculations, arterial blood gas ratios, cardiac output equations, and diagnostic indicators.</p>
+                    <ul class="topic-list">
+                        <li class="topic-tag">Dosage</li>
+                        <li class="topic-tag">Pharmacokinetics</li>
+                        <li class="topic-tag">Cardiovascular</li>
+                        <li class="topic-tag">Epidemiology</li>
+                    </ul>
+                    <div class="subject-footer">
+                        <span>Explore Topic</span>
+                        <span>→</span>
+                    </div>
+                </a>
+
+                <!-- 6. Computer Science & Information Technology -->
+                <a href="subject-details.html?subject=cs" class="subject-card" data-category="tech" data-title="computer science it algorithms complexity big o information theory networks logic">
+                    <div class="card-header-row">
+                        <div class="subject-icon">💻</div>
+                        <span class="badge">Tech</span>
+                    </div>
+                    <h2 class="subject-title">Computer Science & IT</h2>
+                    <p class="subject-desc">Algorithmic complexity, Big-O notation bounds, discrete structures, boolean algebra, and network throughput equations.</p>
+                    <ul class="topic-list">
+                        <li class="topic-tag">Big-O</li>
+                        <li class="topic-tag">Discrete Math</li>
+                        <li class="topic-tag">Boolean Algebra</li>
+                        <li class="topic-tag">Networking</li>
+                    </ul>
+                    <div class="subject-footer">
+                        <span>Explore Topic</span>
+                        <span>→</span>
+                    </div>
+                </a>
+
+                <!-- 7. Artificial Intelligence & Data Science -->
+                <a href="subject-details.html?subject=ai-ds" class="subject-card" data-category="tech" data-title="artificial intelligence data science machine learning deep learning neural networks entropy gradient">
+                    <div class="card-header-row">
+                        <div class="subject-icon">🤖</div>
+                        <span class="badge">Tech</span>
+                    </div>
+                    <h2 class="subject-title">AI & Data Science</h2>
+                    <p class="subject-desc">Loss functions, backpropagation derivatives, activation functions, entropy, vector projections, and dimensionality reduction.</p>
+                    <ul class="topic-list">
+                        <li class="topic-tag">Loss Functions</li>
+                        <li class="topic-tag">Neural Networks</li>
+                        <li class="topic-tag">Gradient Descent</li>
+                        <li class="topic-tag">Metrics</li>
+                    </ul>
+                    <div class="subject-footer">
+                        <span>Explore Topic</span>
+                        <span>→</span>
+                    </div>
+                </a>
+
+                <!-- 8. Electrical & Electronics Engineering -->
+                <a href="subject-details.html?subject=electrical" class="subject-card" data-category="engineering" data-title="electrical electronics engineering circuits ohms law maxwells ac power signals semiconductors">
                     <div class="card-header-row">
                         <div class="subject-icon">⚡</div>
                         <span class="badge">Engineering</span>
                     </div>
-                    <h2 class="subject-title">Electrical Engineering</h2>
-                    <p class="subject-desc">Circuit analysis, AC/DC power systems, signal processing, electromagnetics, and control theory.</p>
+                    <h2 class="subject-title">Electrical & Electronics Eng.</h2>
+                    <p class="subject-desc">Circuit analysis, Kirchhoff's laws, Maxwell's equations, signal processing transforms, AC power, and semiconductor physics.</p>
                     <ul class="topic-list">
                         <li class="topic-tag">Circuits</li>
                         <li class="topic-tag">Signals</li>
                         <li class="topic-tag">AC Power</li>
-                        <li class="topic-tag">Semiconductors</li>
+                        <li class="topic-tag">Maxwell's Eqn</li>
                     </ul>
                     <div class="subject-footer">
-                        <span>14 Topics</span>
-                        <span>Explore →</span>
+                        <span>Explore Topic</span>
+                        <span>→</span>
                     </div>
                 </a>
 
-                <!-- Subject 5: Mechanical Engineering -->
-                <a href="subject-details.html?subject=mechanical" class="subject-card" data-category="engineering" data-title="mechanical engineering statics dynamics fluids stress strain heat transfer">
+                <!-- 9. Mechanical Engineering -->
+                <a href="subject-details.html?subject=mechanical" class="subject-card" data-category="engineering" data-title="mechanical engineering statics dynamics fluids stress strain heat transfer machinery">
                     <div class="card-header-row">
                         <div class="subject-icon">⚙</div>
                         <span class="badge">Engineering</span>
                     </div>
                     <h2 class="subject-title">Mechanical Engineering</h2>
-                    <p class="subject-desc">Mechanics of materials, fluid dynamics, heat transfer, statics, dynamics, and machine design.</p>
+                    <p class="subject-desc">Stress-strain relations, fluid dynamics, heat conduction/convection, mechanical vibration, statics, and machine design.</p>
                     <ul class="topic-list">
                         <li class="topic-tag">Statics</li>
                         <li class="topic-tag">Dynamics</li>
-                        <li class="topic-tag">Fluid Mechanics</li>
                         <li class="topic-tag">Heat Transfer</li>
+                        <li class="topic-tag">Fluid Flow</li>
                     </ul>
                     <div class="subject-footer">
-                        <span>11 Topics</span>
-                        <span>Explore →</span>
+                        <span>Explore Topic</span>
+                        <span>→</span>
                     </div>
                 </a>
 
-                <!-- Subject 6: Computer Science -->
-                <a href="subject-details.html?subject=cs" class="subject-card" data-category="cs" data-title="computer science algorithms complexity big o discrete math information theory">
+                <!-- 10. Civil Engineering -->
+                <a href="subject-details.html?subject=civil" class="subject-card" data-category="engineering" data-title="civil engineering structural hydraulics geotechnical concrete surveying beams shear">
                     <div class="card-header-row">
-                        <div class="subject-icon">💻</div>
-                        <span class="badge">CS</span>
+                        <div class="subject-icon">🏗</div>
+                        <span class="badge">Engineering</span>
                     </div>
-                    <h2 class="subject-title">Computer Science</h2>
-                    <p class="subject-desc">Algorithmic complexity, Big-O notation, discrete mathematics, graph theory, and boolean algebra.</p>
+                    <h2 class="subject-title">Civil Engineering</h2>
+                    <p class="subject-desc">Structural beam deflections, soil mechanics, concrete reinforcement, channel hydraulics, and open channel fluid flow.</p>
                     <ul class="topic-list">
-                        <li class="topic-tag">Big-O Notation</li>
-                        <li class="topic-tag">Discrete Math</li>
-                        <li class="topic-tag">Boolean Algebra</li>
-                        <li class="topic-tag">Graph Theory</li>
+                        <li class="topic-tag">Structures</li>
+                        <li class="topic-tag">Geotechnical</li>
+                        <li class="topic-tag">Hydraulics</li>
+                        <li class="topic-tag">Surveying</li>
                     </ul>
                     <div class="subject-footer">
-                        <span>9 Topics</span>
-                        <span>Explore →</span>
+                        <span>Explore Topic</span>
+                        <span>→</span>
                     </div>
                 </a>
 
-                <!-- Subject 7: Statistics & Data -->
-                <a href="subject-details.html?subject=statistics" class="subject-card" data-category="math" data-title="statistics probability distributions variance regression mean standard deviation">
+                <!-- 11. Chemical Engineering -->
+                <a href="subject-details.html?subject=chemical-eng" class="subject-card" data-category="engineering" data-title="chemical engineering mass transfer reactor thermodynamics distillation phase equilibrium">
                     <div class="card-header-row">
-                        <div class="subject-icon">📊</div>
-                        <span class="badge">Math</span>
+                        <div class="subject-icon">⚗</div>
+                        <span class="badge">Engineering</span>
                     </div>
-                    <h2 class="subject-title">Statistics & Probability</h2>
-                    <p class="subject-desc">Descriptive statistics, probability distributions, hypothesis testing, confidence intervals, and regression.</p>
+                    <h2 class="subject-title">Chemical Engineering</h2>
+                    <p class="subject-desc">Mass transfer balance, chemical reactor design equations, McCabe-Thiele distillation, and multi-phase thermodynamics.</p>
                     <ul class="topic-list">
-                        <li class="topic-tag">Distributions</li>
-                        <li class="topic-tag">Hypothesis Testing</li>
-                        <li class="topic-tag">Regression</li>
-                        <li class="topic-tag">Probability</li>
+                        <li class="topic-tag">Mass Transfer</li>
+                        <li class="topic-tag">Reactors</li>
+                        <li class="topic-tag">Distillation</li>
+                        <li class="topic-tag">Separation</li>
                     </ul>
                     <div class="subject-footer">
-                        <span>8 Topics</span>
-                        <span>Explore →</span>
+                        <span>Explore Topic</span>
+                        <span>→</span>
                     </div>
                 </a>
 
-                <!-- Subject 8: Finance & Economics -->
-                <a href="subject-details.html?subject=finance" class="subject-card" data-category="math" data-title="finance economics compound interest present value annuity microeconomics">
+                <!-- 12. Aerospace & Aviation -->
+                <a href="subject-details.html?subject=aerospace" class="subject-card" data-category="engineering" data-title="aerospace aviation aerodynamics lift drag mach propulsion orbital mechanics trajectory">
+                    <div class="card-header-row">
+                        <div class="subject-icon">🚀</div>
+                        <span class="badge">Engineering</span>
+                    </div>
+                    <h2 class="subject-title">Aerospace & Aviation</h2>
+                    <p class="subject-desc">Lift and drag coefficients, thrust-to-weight, compressible Mach flow, rocket propulsion, and orbital mechanics equations.</p>
+                    <ul class="topic-list">
+                        <li class="topic-tag">Aerodynamics</li>
+                        <li class="topic-tag">Propulsion</li>
+                        <li class="topic-tag">Orbital Mechanics</li>
+                        <li class="topic-tag">Avionics</li>
+                    </ul>
+                    <div class="subject-footer">
+                        <span>Explore Topic</span>
+                        <span>→</span>
+                    </div>
+                </a>
+
+                <!-- 13. Marine & Naval Engineering -->
+                <a href="subject-details.html?subject=marine" class="subject-card" data-category="engineering" data-title="marine naval engineering hydrodynamics buoyancy stability resistance propulsion hull">
+                    <div class="card-header-row">
+                        <div class="subject-icon">⚓</div>
+                        <span class="badge">Engineering</span>
+                    </div>
+                    <h2 class="subject-title">Marine & Naval Engineering</h2>
+                    <p class="subject-desc">Hydrodynamic hull resistance, vessel stability, buoyant metacenter height, propeller efficiency, and wave mechanics.</p>
+                    <ul class="topic-list">
+                        <li class="topic-tag">Buoyancy</li>
+                        <li class="topic-tag">Hydrodynamics</li>
+                        <li class="topic-tag">Hull Resistance</li>
+                        <li class="topic-tag">Propulsion</li>
+                    </ul>
+                    <div class="subject-footer">
+                        <span>Explore Topic</span>
+                        <span>→</span>
+                    </div>
+                </a>
+
+                <!-- 14. Industrial & Manufacturing Engineering -->
+                <a href="subject-details.html?subject=industrial" class="subject-card" data-category="engineering" data-title="industrial manufacturing quality control six sigma queuing lean supply chain eoq">
+                    <div class="card-header-row">
+                        <div class="subject-icon">🏭</div>
+                        <span class="badge">Engineering</span>
+                    </div>
+                    <h2 class="subject-title">Industrial & Manufacturing</h2>
+                    <p class="subject-desc">Economic order quantity (EOQ), queuing theory, Six Sigma statistical process control, and production throughput modeling.</p>
+                    <ul class="topic-list">
+                        <li class="topic-tag">Process Control</li>
+                        <li class="topic-tag">Queuing Theory</li>
+                        <li class="topic-tag">EOQ Model</li>
+                        <li class="topic-tag">Work Design</li>
+                    </ul>
+                    <div class="subject-footer">
+                        <span>Explore Topic</span>
+                        <span>→</span>
+                    </div>
+                </a>
+
+                <!-- 15. Materials Science & Metallurgy -->
+                <a href="subject-details.html?subject=materials" class="subject-card" data-category="engineering" data-title="materials science metallurgy crystallography braggs law dislocations yield phase diagrams">
+                    <div class="card-header-row">
+                        <div class="subject-icon">🔬</div>
+                        <span class="badge">Engineering</span>
+                    </div>
+                    <h2 class="subject-title">Materials Science & Metallurgy</h2>
+                    <p class="subject-desc">Bragg's Law diffraction, crystal lattice packing factors, Hooke's strain tensors, dislocation dynamics, and phase lever rules.</p>
+                    <ul class="topic-list">
+                        <li class="topic-tag">Bragg's Law</li>
+                        <li class="topic-tag">Phase Diagrams</li>
+                        <li class="topic-tag">Crystallography</li>
+                        <li class="topic-tag">Dislocations</li>
+                    </ul>
+                    <div class="subject-footer">
+                        <span>Explore Topic</span>
+                        <span>→</span>
+                    </div>
+                </a>
+
+                <!-- 16. Mining & Petroleum Engineering -->
+                <a href="subject-details.html?subject=mining-petroleum" class="subject-card" data-category="engineering" data-title="mining petroleum engineering reservoir flow darcys law rock mechanics drilling permeability">
+                    <div class="card-header-row">
+                        <div class="subject-icon">🛢</div>
+                        <span class="badge">Engineering</span>
+                    </div>
+                    <h2 class="subject-title">Mining & Petroleum Eng.</h2>
+                    <p class="subject-desc">Darcy's Law for porous media, reservoir volume estimations, rock slope stability, drilling hydraulics, and well-bore pressure.</p>
+                    <ul class="topic-list">
+                        <li class="topic-tag">Darcy's Law</li>
+                        <li class="topic-tag">Reservoir Flow</li>
+                        <li class="topic-tag">Rock Mechanics</li>
+                        <li class="topic-tag">Drilling</li>
+                    </ul>
+                    <div class="subject-footer">
+                        <span>Explore Topic</span>
+                        <span>→</span>
+                    </div>
+                </a>
+
+                <!-- 17. Textile & Fiber Engineering -->
+                <a href="subject-details.html?subject=textile" class="subject-card" data-category="engineering" data-title="textile fiber engineering yarn count tensile strength density weave polymer spinning">
+                    <div class="card-header-row">
+                        <div class="subject-icon">🧶</div>
+                        <span class="badge">Engineering</span>
+                    </div>
+                    <h2 class="subject-title">Textile & Fiber Engineering</h2>
+                    <p class="subject-desc">Yarn linear density metrics (Tex/Denier), fabric crimp calculations, tensile strength relationships, and fiber polymer kinetics.</p>
+                    <ul class="topic-list">
+                        <li class="topic-tag">Yarn Count</li>
+                        <li class="topic-tag">Tex & Denier</li>
+                        <li class="topic-tag">Fabric Tensile</li>
+                        <li class="topic-tag">Fiber Mechanics</li>
+                    </ul>
+                    <div class="subject-footer">
+                        <span>Explore Topic</span>
+                        <span>→</span>
+                    </div>
+                </a>
+
+                <!-- 18. Food Science & Technology -->
+                <a href="subject-details.html?subject=food-science" class="subject-card" data-category="applied" data-title="food science technology thermal death time d value z value water activity preservation shelf life">
+                    <div class="card-header-row">
+                        <div class="subject-icon">🍎</div>
+                        <span class="badge">Applied</span>
+                    </div>
+                    <h2 class="subject-title">Food Science & Technology</h2>
+                    <p class="subject-desc">Thermal processing sterilization (D-value & Z-value), water activity equations, freezing rate models, and shelf-life kinetics.</p>
+                    <ul class="topic-list">
+                        <li class="topic-tag">D & Z Values</li>
+                        <li class="topic-tag">Water Activity</li>
+                        <li class="topic-tag">Sterilization</li>
+                        <li class="topic-tag">Kinetics</li>
+                    </ul>
+                    <div class="subject-footer">
+                        <span>Explore Topic</span>
+                        <span>→</span>
+                    </div>
+                </a>
+
+                <!-- 19. Agricultural Sciences -->
+                <a href="subject-details.html?subject=agriculture" class="subject-card" data-category="applied" data-title="agricultural sciences crop yield irrigation evapotranspiration soil nutrient fertilizer">
+                    <div class="card-header-row">
+                        <div class="subject-icon">🌾</div>
+                        <span class="badge">Applied</span>
+                    </div>
+                    <h2 class="subject-title">Agricultural Sciences</h2>
+                    <p class="subject-desc">Penman-Monteith evapotranspiration, crop yield response functions, irrigation duty ratios, and soil nutrient stoichiometry.</p>
+                    <ul class="topic-list">
+                        <li class="topic-tag">Evapotranspiration</li>
+                        <li class="topic-tag">Irrigation</li>
+                        <li class="topic-tag">Crop Yield</li>
+                        <li class="topic-tag">Nutrient Dosing</li>
+                    </ul>
+                    <div class="subject-footer">
+                        <span>Explore Topic</span>
+                        <span>→</span>
+                    </div>
+                </a>
+
+                <!-- 20. Environmental Sciences -->
+                <a href="subject-details.html?subject=environmental" class="subject-card" data-category="applied" data-title="environmental sciences bod cod pollutant dispersion carbon cycle climate ecology water quality">
+                    <div class="card-header-row">
+                        <div class="subject-icon">🌱</div>
+                        <span class="badge">Applied</span>
+                    </div>
+                    <h2 class="subject-title">Environmental Sciences</h2>
+                    <p class="subject-desc">Biochemical Oxygen Demand (BOD) decay, Gaussian air pollutant plume dispersion, carbon footprint models, and water quality indices.</p>
+                    <ul class="topic-list">
+                        <li class="topic-tag">BOD / COD</li>
+                        <li class="topic-tag">Plume Dispersion</li>
+                        <li class="topic-tag">Carbon Cycle</li>
+                        <li class="topic-tag">Eco-Modeling</li>
+                    </ul>
+                    <div class="subject-footer">
+                        <span>Explore Topic</span>
+                        <span>→</span>
+                    </div>
+                </a>
+
+                <!-- 21. Earth Sciences -->
+                <a href="subject-details.html?subject=earth-sciences" class="subject-card" data-category="sciences" data-title="earth sciences geology geophysics seismology richter plate tectonics hydrology stratigraphy">
+                    <div class="card-header-row">
+                        <div class="subject-icon">🌍</div>
+                        <span class="badge">Science</span>
+                    </div>
+                    <h2 class="subject-title">Earth Sciences & Geology</h2>
+                    <p class="subject-desc">Seismic wave travel time equations, Richter energy magnitudes, radiometric decay dating, and hydrological catchment runoff.</p>
+                    <ul class="topic-list">
+                        <li class="topic-tag">Seismology</li>
+                        <li class="topic-tag">Hydrology</li>
+                        <li class="topic-tag">Radio-Dating</li>
+                        <li class="topic-tag">Plate Dynamics</li>
+                    </ul>
+                    <div class="subject-footer">
+                        <span>Explore Topic</span>
+                        <span>→</span>
+                    </div>
+                </a>
+
+                <!-- 22. Space Science & Astronomy -->
+                <a href="subject-details.html?subject=astronomy" class="subject-card" data-category="sciences" data-title="space science astronomy astrophysics keplers laws hubble red shift orbital mechanics black hole">
+                    <div class="card-header-row">
+                        <div class="subject-icon">🌌</div>
+                        <span class="badge">Science</span>
+                    </div>
+                    <h2 class="subject-title">Space Science & Astronomy</h2>
+                    <p class="subject-desc">Kepler's laws of planetary motion, Hubble's law, Stefan-Boltzmann luminosity, Schwarzschild radius, and Doppler redshift.</p>
+                    <ul class="topic-list">
+                        <li class="topic-tag">Kepler's Laws</li>
+                        <li class="topic-tag">Luminosity</li>
+                        <li class="topic-tag">Hubble's Law</li>
+                        <li class="topic-tag">Orbital Motion</li>
+                    </ul>
+                    <div class="subject-footer">
+                        <span>Explore Topic</span>
+                        <span>→</span>
+                    </div>
+                </a>
+
+                <!-- 23. Architecture & Construction -->
+                <a href="subject-details.html?subject=architecture" class="subject-card" data-category="applied" data-title="architecture construction structural loads thermal insulation u-value acoustic reverberation floor area">
+                    <div class="card-header-row">
+                        <div class="subject-icon">🏛</div>
+                        <span class="badge">Applied</span>
+                    </div>
+                    <h2 class="subject-title">Architecture & Construction</h2>
+                    <p class="subject-desc">Thermal transmittance (U-value) building envelopes, Sabine acoustic reverberation time, floor area ratio (FAR), and structural load distributions.</p>
+                    <ul class="topic-list">
+                        <li class="topic-tag">U-Value</li>
+                        <li class="topic-tag">Reverberation</li>
+                        <li class="topic-tag">FAR Ratio</li>
+                        <li class="topic-tag">Load Specs</li>
+                    </ul>
+                    <div class="subject-footer">
+                        <span>Explore Topic</span>
+                        <span>→</span>
+                    </div>
+                </a>
+
+                <!-- 24. Finance, Economics & Commerce -->
+                <a href="subject-details.html?subject=finance" class="subject-card" data-category="business" data-title="finance economics commerce compound interest present value annuity black scholes inflation gdp">
                     <div class="card-header-row">
                         <div class="subject-icon">📈</div>
-                        <span class="badge">Finance</span>
+                        <span class="badge">Business</span>
                     </div>
-                    <h2 class="subject-title">Financial Mathematics</h2>
-                    <p class="subject-desc">Time value of money, compound interest, annuities, amortization schedules, and financial ratios.</p>
+                    <h2 class="subject-title">Finance, Economics & Commerce</h2>
+                    <p class="subject-desc">Compound interest, Present Value (NPV), Black-Scholes option pricing, elasticity of demand, and macroeconomic multiplier equations.</p>
                     <ul class="topic-list">
-                        <li class="topic-tag">Interest Formulas</li>
-                        <li class="topic-tag">Annuities</li>
-                        <li class="topic-tag">NPV & IRR</li>
-                        <li class="topic-tag">Risk Ratios</li>
+                        <li class="topic-tag">Interest & NPV</li>
+                        <li class="topic-tag">Option Pricing</li>
+                        <li class="topic-tag">Microeconomics</li>
+                        <li class="topic-tag">Financial Ratios</li>
                     </ul>
                     <div class="subject-footer">
-                        <span>7 Topics</span>
-                        <span>Explore →</span>
+                        <span>Explore Topic</span>
+                        <span>→</span>
+                    </div>
+                </a>
+
+                <!-- 25. Business & Management -->
+                <a href="subject-details.html?subject=business" class="subject-card" data-category="business" data-title="business management roi break even net profit customer lifetime value retention marketing">
+                    <div class="card-header-row">
+                        <div class="subject-icon">💼</div>
+                        <span class="badge">Business</span>
+                    </div>
+                    <h2 class="subject-title">Business & Management</h2>
+                    <p class="subject-desc">Break-even volume analysis, Return on Investment (ROI), Customer Lifetime Value (CLV), churn rates, and inventory management formulas.</p>
+                    <ul class="topic-list">
+                        <li class="topic-tag">Break-Even</li>
+                        <li class="topic-tag">ROI & Margin</li>
+                        <li class="topic-tag">CLV & CAC</li>
+                        <li class="topic-tag">Turnover</li>
+                    </ul>
+                    <div class="subject-footer">
+                        <span>Explore Topic</span>
+                        <span>→</span>
+                    </div>
+                </a>
+
+                <!-- 26. Statistics & Operations Research -->
+                <a href="subject-details.html?subject=statistics" class="subject-card" data-category="sciences" data-title="statistics operations research probability distributions markov simplex linear programming hypothesis variance">
+                    <div class="card-header-row">
+                        <div class="subject-icon">📊</div>
+                        <span class="badge">Science</span>
+                    </div>
+                    <h2 class="subject-title">Statistics & Operations Research</h2>
+                    <p class="subject-desc">Probability density functions, Central Limit Theorem, linear programming Simplex algorithm, Markov chains, and variance estimation.</p>
+                    <ul class="topic-list">
+                        <li class="topic-tag">Distributions</li>
+                        <li class="topic-tag">Simplex Method</li>
+                        <li class="topic-tag">Markov Chains</li>
+                        <li class="topic-tag">Hypothesis Tests</li>
+                    </ul>
+                    <div class="subject-footer">
+                        <span>Explore Topic</span>
+                        <span>→</span>
+                    </div>
+                </a>
+
+                <!-- 27. Social Sciences -->
+                <a href="subject-details.html?subject=social-sciences" class="subject-card" data-category="business" data-title="social sciences psychology sociology demography gini coefficient index population growth scaling">
+                    <div class="card-header-row">
+                        <div class="subject-icon">🧠</div>
+                        <span class="badge">Social</span>
+                    </div>
+                    <h2 class="subject-title">Social Sciences & Psychology</h2>
+                    <p class="subject-desc">Gini coefficient for income inequality, psychometric Z-scores, demographic dependency ratios, and social network centrality metrics.</p>
+                    <ul class="topic-list">
+                        <li class="topic-tag">Gini Index</li>
+                        <li class="topic-tag">Psychometrics</li>
+                        <li class="topic-tag">Demographics</li>
+                        <li class="topic-tag">Social Metrics</li>
+                    </ul>
+                    <div class="subject-footer">
+                        <span>Explore Topic</span>
+                        <span>→</span>
+                    </div>
+                </a>
+
+                <!-- 28. Sports & Human Performance -->
+                <a href="subject-details.html?subject=sports-science" class="subject-card" data-category="applied" data-title="sports human performance biomechanics vo2 max heart rate max 1rm energy expenditure power">
+                    <div class="card-header-row">
+                        <div class="subject-icon">🏃</div>
+                        <span class="badge">Applied</span>
+                    </div>
+                    <h2 class="subject-title">Sports & Human Performance</h2>
+                    <p class="subject-desc">VO2 max estimation formulas, 1-Repetition Max (1RM) strength models, target heart rate zones, and gait biomechanical power.</p>
+                    <ul class="topic-list">
+                        <li class="topic-tag">VO2 Max</li>
+                        <li class="topic-tag">1RM Formulas</li>
+                        <li class="topic-tag">Heart Zones</li>
+                        <li class="topic-tag">Biomechanics</li>
+                    </ul>
+                    <div class="subject-footer">
+                        <span>Explore Topic</span>
+                        <span>→</span>
+                    </div>
+                </a>
+
+                <!-- 29. Transportation Engineering -->
+                <a href="subject-details.html?subject=transportation" class="subject-card" data-category="engineering" data-title="transportation engineering traffic flow stopping sight distance pavement capacity queuing signal">
+                    <div class="card-header-row">
+                        <div class="subject-icon">🚦</div>
+                        <span class="badge">Engineering</span>
+                    </div>
+                    <h2 class="subject-title">Transportation Engineering</h2>
+                    <p class="subject-desc">Traffic stream flow-density equations, stopping sight distance (SSD), pavement structural numbers, and signal timing algorithms.</p>
+                    <ul class="topic-list">
+                        <li class="topic-tag">Traffic Flow</li>
+                        <li class="topic-tag">Stopping Distance</li>
+                        <li class="topic-tag">Pavement Design</li>
+                        <li class="topic-tag">Signals</li>
+                    </ul>
+                    <div class="subject-footer">
+                        <span>Explore Topic</span>
+                        <span>→</span>
+                    </div>
+                </a>
+
+                <!-- 30. Defense & Military Science -->
+                <a href="subject-details.html?subject=defense" class="subject-card" data-category="applied" data-title="defense military science exterior ballistics combat lanchester attrition radar range sonar blast">
+                    <div class="card-header-row">
+                        <div class="subject-icon">🛡</div>
+                        <span class="badge">Applied</span>
+                    </div>
+                    <h2 class="subject-title">Defense & Military Science</h2>
+                    <p class="subject-desc">Exterior ballistics trajectory models, Radar range equations, Lanchester combat attrition dynamics, and blast wave pressure attenuation.</p>
+                    <ul class="topic-list">
+                        <li class="topic-tag">Ballistics</li>
+                        <li class="topic-tag">Radar Range</li>
+                        <li class="topic-tag">Lanchester Model</li>
+                        <li class="topic-tag">Acoustics</li>
+                    </ul>
+                    <div class="subject-footer">
+                        <span>Explore Topic</span>
+                        <span>→</span>
+                    </div>
+                </a>
+
+                <!-- 31. Miscellaneous Professional Formula Domains -->
+                <a href="subject-details.html?subject=miscellaneous" class="subject-card" data-category="applied" data-title="miscellaneous professional photography exposure ev audio decibels surveying unit conversions standards">
+                    <div class="card-header-row">
+                        <div class="subject-icon">💡</div>
+                        <span class="badge">General</span>
+                    </div>
+                    <h2 class="subject-title">Miscellaneous Professional Domains</h2>
+                    <p class="subject-desc">Specialized reference equations across photography optics, acoustics decibel scaling, metrology conversions, and safety risk scores.</p>
+                    <ul class="topic-list">
+                        <li class="topic-tag">Photography EV</li>
+                        <li class="topic-tag">Decibel Math</li>
+                        <li class="topic-tag">Metrology</li>
+                        <li class="topic-tag">Risk Assessment</li>
+                    </ul>
+                    <div class="subject-footer">
+                        <span>Explore Topic</span>
+                        <span>→</span>
                     </div>
                 </a>
 

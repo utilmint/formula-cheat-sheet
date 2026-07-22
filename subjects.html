@@ -1,0 +1,1005 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="light">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>All Subjects — FormulaHub Cheat Sheet</title>
+    <!-- Internal CSS Stylesheet -->
+    <style>
+        /* ==========================================================================
+           1. DESIGN SYSTEM & CSS VARIABLES
+           ========================================================================== */
+        :root {
+            /* Colors - Light Mode */
+            --primary-hue: 220;
+            --primary: hsl(var(--primary-hue), 85%, 56%);
+            --primary-hover: hsl(var(--primary-hue), 85%, 48%);
+            --primary-light: hsl(var(--primary-hue), 85%, 96%);
+            --accent: hsl(260, 85%, 62%);
+            
+            --bg-body: #f8fafc;
+            --bg-surface: #ffffff;
+            --bg-surface-glass: rgba(255, 255, 255, 0.85);
+            --bg-subtle: #f1f5f9;
+            
+            --text-main: #0f172a;
+            --text-muted: #64748b;
+            --text-inverse: #ffffff;
+            
+            --border-color: #e2e8f0;
+            --border-hover: #cbd5e1;
+            
+            /* Shadows & Elevation */
+            --shadow-sm: 0 1px 3px rgba(0,0,0,0.05), 0 1px 2px rgba(0,0,0,0.1);
+            --shadow-md: 0 4px 12px -2px rgba(0,0,0,0.08), 0 2px 6px -1px rgba(0,0,0,0.04);
+            --shadow-lg: 0 12px 24px -4px rgba(0,0,0,0.1), 0 4px 8px -2px rgba(0,0,0,0.04);
+            --shadow-glow: 0 0 20px rgba(59, 130, 246, 0.25);
+            
+            /* Layout & Spacing */
+            --radius-sm: 8px;
+            --radius-md: 12px;
+            --radius-lg: 16px;
+            --radius-full: 9999px;
+            --max-width: 1280px;
+            --nav-height: 72px;
+            
+            /* Animations */
+            --transition-fast: 0.15s ease;
+            --transition-normal: 0.25s cubic-bezier(0.4, 0, 0.2, 1);
+            --transition-slow: 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+
+        /* Dark Theme Overrides */
+        [data-theme="dark"] {
+            --bg-body: #0b0f19;
+            --bg-surface: #151c2c;
+            --bg-surface-glass: rgba(21, 28, 44, 0.85);
+            --bg-subtle: #1e293b;
+            
+            --text-main: #f8fafc;
+            --text-muted: #94a3b8;
+            
+            --border-color: #1e293b;
+            --border-hover: #334155;
+            
+            --shadow-sm: 0 1px 3px rgba(0,0,0,0.3);
+            --shadow-md: 0 4px 12px rgba(0,0,0,0.4);
+            --shadow-lg: 0 12px 24px rgba(0,0,0,0.5);
+            --shadow-glow: 0 0 25px rgba(59, 130, 246, 0.35);
+        }
+
+        /* ==========================================================================
+           2. BASE RESETS & TYPOGRAPHY
+           ========================================================================== */
+        *, *::before, *::after {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        html {
+            scroll-behavior: smooth;
+            font-size: 16px;
+        }
+
+        body {
+            font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, sans-serif;
+            background-color: var(--bg-body);
+            color: var(--text-main);
+            line-height: 1.6;
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+            transition: background-color var(--transition-normal), color var(--transition-normal);
+            -webkit-font-smoothing: antialiased;
+        }
+
+        a {
+            color: inherit;
+            text-decoration: none;
+        }
+
+        button, input {
+            font: inherit;
+            border: none;
+            outline: none;
+            background: none;
+        }
+
+        /* Container Utility */
+        .container {
+            width: 100%;
+            max-width: var(--max-width);
+            margin: 0 auto;
+            padding: 0 1.5rem;
+        }
+
+        /* ==========================================================================
+           3. NAVIGATION BAR
+           ========================================================================== */
+        .navbar {
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+            height: var(--nav-height);
+            background-color: var(--bg-surface-glass);
+            backdrop-filter: blur(12px);
+            -webkit-backdrop-filter: blur(12px);
+            border-bottom: 1px solid var(--border-color);
+            transition: background-color var(--transition-normal), border-color var(--transition-normal);
+        }
+
+        .nav-container {
+            height: 100%;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+        }
+
+        .brand-logo {
+            display: flex;
+            align-items: center;
+            gap: 0.75rem;
+            font-size: 1.25rem;
+            font-weight: 700;
+            color: var(--text-main);
+            letter-spacing: -0.02em;
+        }
+
+        .logo-icon {
+            width: 38px;
+            height: 38px;
+            background: linear-gradient(135deg, var(--primary), var(--accent));
+            border-radius: var(--radius-md);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-weight: 800;
+            box-shadow: var(--shadow-sm);
+        }
+
+        .nav-links {
+            display: flex;
+            align-items: center;
+            gap: 1.5rem;
+            list-style: none;
+        }
+
+        .nav-link {
+            font-weight: 500;
+            color: var(--text-muted);
+            transition: color var(--transition-fast);
+            padding: 0.5rem 0.25rem;
+            position: relative;
+        }
+
+        .nav-link:hover, .nav-link.active {
+            color: var(--primary);
+        }
+
+        .nav-link.active::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 100%;
+            height: 2px;
+            background-color: var(--primary);
+            border-radius: var(--radius-full);
+        }
+
+        .nav-actions {
+            display: flex;
+            align-items: center;
+            gap: 0.75rem;
+        }
+
+        .icon-btn {
+            width: 40px;
+            height: 40px;
+            border-radius: var(--radius-md);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: var(--text-muted);
+            background-color: var(--bg-subtle);
+            cursor: pointer;
+            transition: all var(--transition-fast);
+        }
+
+        .icon-btn:hover {
+            color: var(--text-main);
+            background-color: var(--border-color);
+        }
+
+        .mobile-toggle {
+            display: none;
+        }
+
+        /* ==========================================================================
+           4. PAGE HEADER & FILTER CONTROLS
+           ========================================================================== */
+        .page-header {
+            padding: 3.5rem 0 2rem;
+            border-bottom: 1px solid var(--border-color);
+            background-color: var(--bg-surface);
+            transition: background-color var(--transition-normal);
+        }
+
+        .breadcrumb {
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            font-size: 0.875rem;
+            color: var(--text-muted);
+            margin-bottom: 1rem;
+        }
+
+        .breadcrumb a:hover {
+            color: var(--primary);
+        }
+
+        .page-title {
+            font-size: 2.5rem;
+            font-weight: 800;
+            letter-spacing: -0.03em;
+            margin-bottom: 0.5rem;
+        }
+
+        .page-subtitle {
+            font-size: 1.05rem;
+            color: var(--text-muted);
+            max-width: 600px;
+        }
+
+        /* Filter Controls Bar */
+        .filter-bar {
+            margin-top: 2rem;
+            display: flex;
+            flex-wrap: wrap;
+            align-items: center;
+            justify-content: space-between;
+            gap: 1rem;
+        }
+
+        .category-pills {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 0.5rem;
+        }
+
+        .pill-btn {
+            padding: 0.5rem 1.25rem;
+            border-radius: var(--radius-full);
+            background-color: var(--bg-subtle);
+            color: var(--text-muted);
+            font-size: 0.875rem;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all var(--transition-fast);
+            border: 1px solid transparent;
+        }
+
+        .pill-btn:hover {
+            color: var(--text-main);
+            border-color: var(--border-color);
+        }
+
+        .pill-btn.active {
+            background-color: var(--primary);
+            color: var(--text-inverse);
+            border-color: var(--primary);
+            box-shadow: var(--shadow-sm);
+        }
+
+        .filter-search {
+            position: relative;
+            min-width: 260px;
+        }
+
+        .filter-search input {
+            width: 100%;
+            padding: 0.5rem 1rem 0.5rem 2.5rem;
+            background-color: var(--bg-subtle);
+            border: 1px solid var(--border-color);
+            border-radius: var(--radius-full);
+            font-size: 0.875rem;
+            color: var(--text-main);
+            transition: all var(--transition-fast);
+        }
+
+        .filter-search input:focus {
+            border-color: var(--primary);
+            background-color: var(--bg-surface);
+            box-shadow: 0 0 0 3px rgba(59, 130, 246, 0.15);
+        }
+
+        .filter-search svg {
+            position: absolute;
+            left: 0.875rem;
+            top: 50%;
+            transform: translateY(-50%);
+            color: var(--text-muted);
+        }
+
+        /* ==========================================================================
+           5. SUBJECTS GRID & CARDS
+           ========================================================================== */
+        .subjects-section {
+            padding: 3rem 0;
+        }
+
+        .subjects-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
+            gap: 1.5rem;
+        }
+
+        .subject-card {
+            background-color: var(--bg-surface);
+            border: 1px solid var(--border-color);
+            border-radius: var(--radius-lg);
+            padding: 1.75rem;
+            transition: all var(--transition-normal);
+            display: flex;
+            flex-direction: column;
+            position: relative;
+            cursor: pointer;
+        }
+
+        .subject-card:hover {
+            transform: translateY(-4px);
+            box-shadow: var(--shadow-md);
+            border-color: var(--border-hover);
+        }
+
+        .card-header-row {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            margin-bottom: 1.25rem;
+        }
+
+        .subject-icon {
+            width: 52px;
+            height: 52px;
+            border-radius: var(--radius-md);
+            background-color: var(--primary-light);
+            color: var(--primary);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.75rem;
+            font-weight: 700;
+        }
+
+        [data-theme="dark"] .subject-icon {
+            background-color: rgba(59, 130, 246, 0.15);
+        }
+
+        .badge {
+            padding: 0.25rem 0.75rem;
+            border-radius: var(--radius-full);
+            font-size: 0.75rem;
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 0.05em;
+            background-color: var(--bg-subtle);
+            color: var(--text-muted);
+        }
+
+        .subject-title {
+            font-size: 1.35rem;
+            font-weight: 700;
+            margin-bottom: 0.5rem;
+            color: var(--text-main);
+        }
+
+        .subject-desc {
+            font-size: 0.925rem;
+            color: var(--text-muted);
+            margin-bottom: 1.5rem;
+            line-height: 1.5;
+            flex-grow: 1;
+        }
+
+        .topic-list {
+            list-style: none;
+            display: flex;
+            flex-wrap: wrap;
+            gap: 0.4rem;
+            margin-bottom: 1.5rem;
+        }
+
+        .topic-tag {
+            background-color: var(--bg-subtle);
+            color: var(--text-muted);
+            font-size: 0.775rem;
+            padding: 0.2rem 0.6rem;
+            border-radius: var(--radius-sm);
+            font-weight: 500;
+        }
+
+        .subject-footer {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding-top: 1rem;
+            border-top: 1px solid var(--border-color);
+            font-size: 0.875rem;
+            font-weight: 600;
+            color: var(--primary);
+        }
+
+        /* Empty Filter State */
+        .empty-state {
+            text-align: center;
+            padding: 4rem 1rem;
+            display: none;
+            grid-column: 1 / -1;
+        }
+
+        .empty-state-icon {
+            font-size: 3rem;
+            margin-bottom: 1rem;
+            opacity: 0.5;
+        }
+
+        .empty-state-title {
+            font-size: 1.25rem;
+            font-weight: 700;
+            margin-bottom: 0.5rem;
+        }
+
+        .empty-state-desc {
+            color: var(--text-muted);
+            font-size: 0.95rem;
+        }
+
+        /* ==========================================================================
+           6. FOOTER SECTION
+           ========================================================================== */
+        .footer {
+            background-color: var(--bg-surface);
+            border-top: 1px solid var(--border-color);
+            padding: 4rem 0 2rem;
+            margin-top: auto;
+            transition: background-color var(--transition-normal);
+        }
+
+        .footer-grid {
+            display: grid;
+            grid-template-columns: 2fr repeat(3, 1fr);
+            gap: 3rem;
+            margin-bottom: 3rem;
+        }
+
+        .footer-brand p {
+            color: var(--text-muted);
+            font-size: 0.9rem;
+            margin-top: 1rem;
+            max-width: 300px;
+        }
+
+        .footer-column-title {
+            font-size: 0.95rem;
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 0.05em;
+            margin-bottom: 1.25rem;
+        }
+
+        .footer-links {
+            list-style: none;
+            display: flex;
+            flex-direction: column;
+            gap: 0.75rem;
+        }
+
+        .footer-link {
+            color: var(--text-muted);
+            font-size: 0.9rem;
+            transition: color var(--transition-fast);
+        }
+
+        .footer-link:hover {
+            color: var(--primary);
+        }
+
+        .footer-bottom {
+            padding-top: 2rem;
+            border-top: 1px solid var(--border-color);
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            font-size: 0.875rem;
+            color: var(--text-muted);
+        }
+
+        /* ==========================================================================
+           7. RESPONSIVE MEDIA QUERIES
+           ========================================================================== */
+        @media (max-width: 992px) {
+            .footer-grid {
+                grid-template-columns: 1fr 1fr;
+                gap: 2rem;
+            }
+        }
+
+        @media (max-width: 768px) {
+            .page-title {
+                font-size: 2rem;
+            }
+
+            .nav-links {
+                position: fixed;
+                top: var(--nav-height);
+                left: 0;
+                right: 0;
+                background-color: var(--bg-surface);
+                border-bottom: 1px solid var(--border-color);
+                flex-direction: column;
+                padding: 1.5rem;
+                gap: 1rem;
+                display: none;
+                box-shadow: var(--shadow-lg);
+            }
+
+            .nav-links.is-active {
+                display: flex;
+            }
+
+            .mobile-toggle {
+                display: flex;
+            }
+
+            .filter-bar {
+                flex-direction: column;
+                align-items: stretch;
+            }
+
+            .filter-search {
+                width: 100%;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .footer-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .footer-bottom {
+                flex-direction: column;
+                gap: 1rem;
+                text-align: center;
+            }
+
+            .category-pills {
+                overflow-x: auto;
+                padding-bottom: 0.5rem;
+                flex-wrap: nowrap;
+            }
+
+            .pill-btn {
+                white-space: nowrap;
+            }
+        }
+    </style>
+</head>
+<body>
+
+    <!-- ==========================================================================
+       NAVIGATION BAR
+       ========================================================================== -->
+    <nav class="navbar" aria-label="Main Navigation">
+        <div class="container nav-container">
+            <a href="index.html" class="brand-logo" aria-label="FormulaHub Home">
+                <div class="logo-icon">ƒx</div>
+                <span>FormulaHub</span>
+            </a>
+
+            <!-- Navigation Links -->
+            <ul class="nav-links" id="navLinks">
+                <li><a href="index.html" class="nav-link">Home</a></li>
+                <li><a href="subjects.html" class="nav-link active">Subjects</a></li>
+                <li><a href="calculators.html" class="nav-link">Calculators</a></li>
+                <li><a href="converter.html" class="nav-link">Converter</a></li>
+                <li><a href="constants.html" class="nav-link">Constants</a></li>
+                <li><a href="symbols.html" class="nav-link">Symbols</a></li>
+            </ul>
+
+            <!-- Header Action Controls -->
+            <div class="nav-actions">
+                <!-- Theme Toggle Button -->
+                <button class="icon-btn" id="themeToggleBtn" aria-label="Toggle Theme" title="Toggle Dark/Light Mode">
+                    <svg id="sunIcon" width="20" height="20" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M12 3v1m0 16v1m9-9h-1M4 12H3m15.364 6.364l-.707-.707M6.343 6.343l-.707-.707m12.728 0l-.707.707M6.343 17.657l-.707.707M16 12a4 4 0 11-8 0 4 4 0 018 0z"></path></svg>
+                    <svg id="moonIcon" width="20" height="20" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24" style="display:none;"><path d="M20.354 15.354A9 9 0 018.646 3.646 9.003 9.003 0 0012 21a9.003 9.003 0 008.354-5.646z"></path></svg>
+                </button>
+
+                <!-- Search Link Button -->
+                <a href="search.html" class="icon-btn" aria-label="Search Formulas">
+                    <svg width="20" height="20" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"></path></svg>
+                </a>
+
+                <!-- Mobile Navigation Toggle -->
+                <button class="icon-btn mobile-toggle" id="mobileMenuBtn" aria-label="Toggle Navigation Menu">
+                    <svg width="20" height="20" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M4 6h16M4 12h16M4 18h16"></path></svg>
+                </button>
+            </div>
+        </div>
+    </nav>
+
+    <!-- ==========================================================================
+       PAGE HEADER
+       ========================================================================== -->
+    <header class="page-header">
+        <div class="container">
+            <div class="breadcrumb">
+                <a href="index.html">Home</a>
+                <span>/</span>
+                <span style="color: var(--text-main);">Subjects</span>
+            </div>
+            <h1 class="page-title">Formula Subjects</h1>
+            <p class="page-subtitle">Select a subject area to explore comprehensive cheat sheets, formulas, derivations, and examples.</p>
+
+            <!-- Interactive Filter Controls -->
+            <div class="filter-bar">
+                <div class="category-pills" id="categoryPills">
+                    <button class="pill-btn active" data-filter="all">All Fields</button>
+                    <button class="pill-btn" data-filter="math">Mathematics</button>
+                    <button class="pill-btn" data-filter="physics">Physics</button>
+                    <button class="pill-btn" data-filter="chemistry">Chemistry</button>
+                    <button class="pill-btn" data-filter="engineering">Engineering</button>
+                    <button class="pill-btn" data-filter="cs">Computer Science</button>
+                </div>
+
+                <div class="filter-search">
+                    <svg width="16" height="16" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"></path></svg>
+                    <input type="text" id="subjectSearchInput" placeholder="Filter subjects..." aria-label="Filter subjects">
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <!-- ==========================================================================
+       MAIN CONTENT - SUBJECTS GRID
+       ========================================================================== -->
+    <main class="subjects-section">
+        <div class="container">
+            <div class="subjects-grid" id="subjectsGrid">
+
+                <!-- Subject 1: Mathematics -->
+                <a href="subject-details.html?subject=mathematics" class="subject-card" data-category="math" data-title="mathematics math calculus algebra geometry trigonometry">
+                    <div class="card-header-row">
+                        <div class="subject-icon">∑</div>
+                        <span class="badge">Math</span>
+                    </div>
+                    <h2 class="subject-title">Mathematics</h2>
+                    <p class="subject-desc">Foundational and advanced mathematical formulas covering algebra, calculus, vectors, and linear systems.</p>
+                    <ul class="topic-list">
+                        <li class="topic-tag">Algebra</li>
+                        <li class="topic-tag">Calculus</li>
+                        <li class="topic-tag">Trigonometry</li>
+                        <li class="topic-tag">Geometry</li>
+                    </ul>
+                    <div class="subject-footer">
+                        <span>15 Topics</span>
+                        <span>Explore →</span>
+                    </div>
+                </a>
+
+                <!-- Subject 2: Physics -->
+                <a href="subject-details.html?subject=physics" class="subject-card" data-category="physics" data-title="physics mechanics thermodynamics electromagnetism optics quantum">
+                    <div class="card-header-row">
+                        <div class="subject-icon">⚛</div>
+                        <span class="badge">Physics</span>
+                    </div>
+                    <h2 class="subject-title">Physics</h2>
+                    <p class="subject-desc">Laws of physics, classical mechanics, wave dynamics, electromagnetism, and modern quantum theory.</p>
+                    <ul class="topic-list">
+                        <li class="topic-tag">Mechanics</li>
+                        <li class="topic-tag">E&M</li>
+                        <li class="topic-tag">Thermodynamics</li>
+                        <li class="topic-tag">Optics</li>
+                    </ul>
+                    <div class="subject-footer">
+                        <span>12 Topics</span>
+                        <span>Explore →</span>
+                    </div>
+                </a>
+
+                <!-- Subject 3: Chemistry -->
+                <a href="subject-details.html?subject=chemistry" class="subject-card" data-category="chemistry" data-title="chemistry stoichiometry kinetics thermodynamics organic acid base">
+                    <div class="card-header-row">
+                        <div class="subject-icon">🧪</div>
+                        <span class="badge">Chemistry</span>
+                    </div>
+                    <h2 class="subject-title">Chemistry</h2>
+                    <p class="subject-desc">Chemical reactions, stoichiometry, gas laws, chemical equilibrium, thermochemistry, and solutions.</p>
+                    <ul class="topic-list">
+                        <li class="topic-tag">Stoichiometry</li>
+                        <li class="topic-tag">Gas Laws</li>
+                        <li class="topic-tag">Kinetics</li>
+                        <li class="topic-tag">Acids & Bases</li>
+                    </ul>
+                    <div class="subject-footer">
+                        <span>10 Topics</span>
+                        <span>Explore →</span>
+                    </div>
+                </a>
+
+                <!-- Subject 4: Electrical Engineering -->
+                <a href="subject-details.html?subject=electrical" class="subject-card" data-category="engineering" data-title="electrical engineering circuits ohms law signals power electronics">
+                    <div class="card-header-row">
+                        <div class="subject-icon">⚡</div>
+                        <span class="badge">Engineering</span>
+                    </div>
+                    <h2 class="subject-title">Electrical Engineering</h2>
+                    <p class="subject-desc">Circuit analysis, AC/DC power systems, signal processing, electromagnetics, and control theory.</p>
+                    <ul class="topic-list">
+                        <li class="topic-tag">Circuits</li>
+                        <li class="topic-tag">Signals</li>
+                        <li class="topic-tag">AC Power</li>
+                        <li class="topic-tag">Semiconductors</li>
+                    </ul>
+                    <div class="subject-footer">
+                        <span>14 Topics</span>
+                        <span>Explore →</span>
+                    </div>
+                </a>
+
+                <!-- Subject 5: Mechanical Engineering -->
+                <a href="subject-details.html?subject=mechanical" class="subject-card" data-category="engineering" data-title="mechanical engineering statics dynamics fluids stress strain heat transfer">
+                    <div class="card-header-row">
+                        <div class="subject-icon">⚙</div>
+                        <span class="badge">Engineering</span>
+                    </div>
+                    <h2 class="subject-title">Mechanical Engineering</h2>
+                    <p class="subject-desc">Mechanics of materials, fluid dynamics, heat transfer, statics, dynamics, and machine design.</p>
+                    <ul class="topic-list">
+                        <li class="topic-tag">Statics</li>
+                        <li class="topic-tag">Dynamics</li>
+                        <li class="topic-tag">Fluid Mechanics</li>
+                        <li class="topic-tag">Heat Transfer</li>
+                    </ul>
+                    <div class="subject-footer">
+                        <span>11 Topics</span>
+                        <span>Explore →</span>
+                    </div>
+                </a>
+
+                <!-- Subject 6: Computer Science -->
+                <a href="subject-details.html?subject=cs" class="subject-card" data-category="cs" data-title="computer science algorithms complexity big o discrete math information theory">
+                    <div class="card-header-row">
+                        <div class="subject-icon">💻</div>
+                        <span class="badge">CS</span>
+                    </div>
+                    <h2 class="subject-title">Computer Science</h2>
+                    <p class="subject-desc">Algorithmic complexity, Big-O notation, discrete mathematics, graph theory, and boolean algebra.</p>
+                    <ul class="topic-list">
+                        <li class="topic-tag">Big-O Notation</li>
+                        <li class="topic-tag">Discrete Math</li>
+                        <li class="topic-tag">Boolean Algebra</li>
+                        <li class="topic-tag">Graph Theory</li>
+                    </ul>
+                    <div class="subject-footer">
+                        <span>9 Topics</span>
+                        <span>Explore →</span>
+                    </div>
+                </a>
+
+                <!-- Subject 7: Statistics & Data -->
+                <a href="subject-details.html?subject=statistics" class="subject-card" data-category="math" data-title="statistics probability distributions variance regression mean standard deviation">
+                    <div class="card-header-row">
+                        <div class="subject-icon">📊</div>
+                        <span class="badge">Math</span>
+                    </div>
+                    <h2 class="subject-title">Statistics & Probability</h2>
+                    <p class="subject-desc">Descriptive statistics, probability distributions, hypothesis testing, confidence intervals, and regression.</p>
+                    <ul class="topic-list">
+                        <li class="topic-tag">Distributions</li>
+                        <li class="topic-tag">Hypothesis Testing</li>
+                        <li class="topic-tag">Regression</li>
+                        <li class="topic-tag">Probability</li>
+                    </ul>
+                    <div class="subject-footer">
+                        <span>8 Topics</span>
+                        <span>Explore →</span>
+                    </div>
+                </a>
+
+                <!-- Subject 8: Finance & Economics -->
+                <a href="subject-details.html?subject=finance" class="subject-card" data-category="math" data-title="finance economics compound interest present value annuity microeconomics">
+                    <div class="card-header-row">
+                        <div class="subject-icon">📈</div>
+                        <span class="badge">Finance</span>
+                    </div>
+                    <h2 class="subject-title">Financial Mathematics</h2>
+                    <p class="subject-desc">Time value of money, compound interest, annuities, amortization schedules, and financial ratios.</p>
+                    <ul class="topic-list">
+                        <li class="topic-tag">Interest Formulas</li>
+                        <li class="topic-tag">Annuities</li>
+                        <li class="topic-tag">NPV & IRR</li>
+                        <li class="topic-tag">Risk Ratios</li>
+                    </ul>
+                    <div class="subject-footer">
+                        <span>7 Topics</span>
+                        <span>Explore →</span>
+                    </div>
+                </a>
+
+                <!-- Empty State Message when filters yield no matches -->
+                <div class="empty-state" id="emptyState">
+                    <div class="empty-state-icon">🔍</div>
+                    <h3 class="empty-state-title">No subjects found</h3>
+                    <p class="empty-state-desc">Try loosening your search query or selecting a different category filter.</p>
+                </div>
+
+            </div>
+        </div>
+    </main>
+
+    <!-- ==========================================================================
+       FOOTER SECTION
+       ========================================================================== -->
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-grid">
+                <!-- Brand Info -->
+                <div class="footer-brand">
+                    <a href="index.html" class="brand-logo">
+                        <div class="logo-icon">ƒx</div>
+                        <span>FormulaHub</span>
+                    </a>
+                    <p>A comprehensive, lightweight, open-source formula reference system designed for high performance and accessibility.</p>
+                </div>
+
+                <!-- Navigation Column 1 -->
+                <div>
+                    <h4 class="footer-column-title">Reference</h4>
+                    <ul class="footer-links">
+                        <li><a href="subjects.html" class="footer-link">All Subjects</a></li>
+                        <li><a href="constants.html" class="footer-link">Physical Constants</a></li>
+                        <li><a href="symbols.html" class="footer-link">Greek Symbols</a></li>
+                        <li><a href="favorites.html" class="footer-link">Saved Formulas</a></li>
+                    </ul>
+                </div>
+
+                <!-- Navigation Column 2 -->
+                <div>
+                    <h4 class="footer-column-title">Tools</h4>
+                    <ul class="footer-links">
+                        <li><a href="calculators.html" class="footer-link">Calculators</a></li>
+                        <li><a href="converter.html" class="footer-link">Unit Converter</a></li>
+                        <li><a href="search.html" class="footer-link">Advanced Search</a></li>
+                        <li><a href="recent.html" class="footer-link">Recent Updates</a></li>
+                    </ul>
+                </div>
+
+                <!-- Navigation Column 3 -->
+                <div>
+                    <h4 class="footer-column-title">Platform</h4>
+                    <ul class="footer-links">
+                        <li><a href="about.html" class="footer-link">About Project</a></li>
+                        <li><a href="contact.html" class="footer-link">Contact & Feedback</a></li>
+                        <li><a href="settings.html" class="footer-link">Preferences</a></li>
+                        <li><a href="privacy.html" class="footer-link">Privacy Policy</a></li>
+                        <li><a href="terms.html" class="footer-link">Terms of Use</a></li>
+                    </ul>
+                </div>
+            </div>
+
+            <!-- Footer Bottom Bar -->
+            <div class="footer-bottom">
+                <p>&copy; 2026 FormulaHub. Built with Vanilla Web Standards.</p>
+                <p>Designed for speed, clarity, and precision.</p>
+            </div>
+        </div>
+    </footer>
+
+    <!-- ==========================================================================
+       JAVASCRIPT LOGIC
+       ========================================================================== -->
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            // Theme Toggle Logic
+            const themeToggleBtn = document.getElementById('themeToggleBtn');
+            const sunIcon = document.getElementById('sunIcon');
+            const moonIcon = document.getElementById('moonIcon');
+            const htmlElement = document.documentElement;
+
+            const savedTheme = localStorage.getItem('formulahub_theme');
+            const systemPrefersDark = window.matchMedia('(prefers-color-scheme: dark)').matches;
+            
+            const currentTheme = savedTheme || (systemPrefersDark ? 'dark' : 'light');
+            applyTheme(currentTheme);
+
+            themeToggleBtn.addEventListener('click', () => {
+                const activeTheme = htmlElement.getAttribute('data-theme');
+                const newTheme = activeTheme === 'dark' ? 'light' : 'dark';
+                applyTheme(newTheme);
+            });
+
+            function applyTheme(theme) {
+                htmlElement.setAttribute('data-theme', theme);
+                localStorage.setItem('formulahub_theme', theme);
+
+                if (theme === 'dark') {
+                    sunIcon.style.display = 'none';
+                    moonIcon.style.display = 'block';
+                } else {
+                    sunIcon.style.display = 'block';
+                    moonIcon.style.display = 'none';
+                }
+            }
+
+            // Mobile Navigation Toggle Logic
+            const mobileMenuBtn = document.getElementById('mobileMenuBtn');
+            const navLinks = document.getElementById('navLinks');
+
+            mobileMenuBtn.addEventListener('click', () => {
+                navLinks.classList.toggle('is-active');
+            });
+
+            document.addEventListener('click', (event) => {
+                if (!event.target.closest('.navbar')) {
+                    navLinks.classList.remove('is-active');
+                }
+            });
+
+            // Interactive Filtering System
+            const categoryPills = document.querySelectorAll('#categoryPills .pill-btn');
+            const searchInput = document.getElementById('subjectSearchInput');
+            const subjectCards = document.querySelectorAll('.subject-card');
+            const emptyState = document.getElementById('emptyState');
+
+            let activeCategory = 'all';
+            let searchQuery = '';
+
+            // Handle Category Pill Clicks
+            categoryPills.forEach(pill => {
+                pill.addEventListener('click', () => {
+                    categoryPills.forEach(p => p.classList.remove('active'));
+                    pill.classList.add('active');
+                    activeCategory = pill.getAttribute('data-filter');
+                    filterCards();
+                });
+            });
+
+            // Handle Search Input
+            searchInput.addEventListener('input', (e) => {
+                searchQuery = e.target.value.toLowerCase().trim();
+                filterCards();
+            });
+
+            // Filter Subjects Based on Active Category and Search Text
+            function filterCards() {
+                let visibleCount = 0;
+
+                subjectCards.forEach(card => {
+                    const cardCategory = card.getAttribute('data-category');
+                    const cardKeywords = card.getAttribute('data-title').toLowerCase();
+
+                    const matchesCategory = (activeCategory === 'all' || cardCategory === activeCategory);
+                    const matchesSearch = (searchQuery === '' || cardKeywords.includes(searchQuery));
+
+                    if (matchesCategory && matchesSearch) {
+                        card.style.display = 'flex';
+                        visibleCount++;
+                    } else {
+                        card.style.display = 'none';
+                    }
+                });
+
+                // Display empty state if no cards match criteria
+                if (visibleCount === 0) {
+                    emptyState.style.display = 'block';
+                } else {
+                    emptyState.style.display = 'none';
+                }
+            }
+        });
+    </script>
+</body>
+</html>

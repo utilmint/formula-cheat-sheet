@@ -1,0 +1,161 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="system">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Mathematics Formulas — Utilmint</title>
+  <link rel="stylesheet" href="css/variables.css">
+  <link rel="stylesheet" href="css/style.css">
+  <link rel="stylesheet" href="css/navbar.css">
+  <link rel="stylesheet" href="css/sidebar.css">
+  <link rel="stylesheet" href="css/cards.css">
+  <link rel="stylesheet" href="css/buttons.css">
+  <link rel="stylesheet" href="css/footer.css">
+  <link rel="stylesheet" href="css/darkmode.css">
+  <link rel="stylesheet" href="css/responsive.css">
+</head>
+<body>
+
+  <!-- Sticky Top Navbar -->
+  <header class="navbar-wrapper">
+    <!-- Navbar structure identical to index.html -->
+  </header>
+
+  <!-- Sidebar Layout Wrapper -->
+  <div class="layout-with-sidebar container">
+    
+    <!-- Left Navigation Sidebar -->
+    <aside class="sidebar" id="subjectSidebar">
+      <div class="sidebar-header">
+        <h3 id="subjectTitle">Mathematics</h3>
+        <p class="text-xs text-muted">Subcategories & Topics</p>
+      </div>
+
+      <nav class="sidebar-nav">
+        <a href="#all" class="sidebar-link active">All Topics</a>
+        <a href="#algebra" class="sidebar-link">Algebra</a>
+        <a href="#calculus" class="sidebar-link">Calculus</a>
+        <a href="#trigonometry" class="sidebar-link">Trigonometry</a>
+        <a href="#geometry" class="sidebar-link">Geometry</a>
+      </nav>
+
+      <div class="sidebar-filter-box">
+        <label for="difficultySelect" class="form-label">Difficulty Filter</label>
+        <select id="difficultySelect" class="form-select">
+          <option value="all">All Difficulties</option>
+          <option value="beginner">Beginner</option>
+          <option value="intermediate">Intermediate</option>
+          <option value="advanced">Advanced</option>
+        </select>
+      </div>
+    </aside>
+
+    <!-- Main Content Area -->
+    <main class="main-layout-content">
+      
+      <!-- Breadcrumb Navigation -->
+      <nav class="breadcrumb" aria-label="Breadcrumb">
+        <a href="index.html">Home</a> / 
+        <a href="subjects.html">Subjects</a> / 
+        <span class="active">Mathematics</span>
+      </nav>
+
+      <!-- Subject Header Banner -->
+      <header class="subject-banner">
+        <h1>Mathematics Formula Cheat Sheet</h1>
+        <p class="text-muted">Master essential mathematics formulas, variables, derivatives, and identities.</p>
+      </header>
+
+      <!-- Search & Filters Toolbar -->
+      <div class="toolbar-flex">
+        <input type="search" placeholder="Filter formulas in Mathematics..." class="form-input search-inline">
+        <div class="toolbar-actions">
+          <button class="btn btn-secondary btn-sm">Expand All</button>
+          <button class="btn btn-secondary btn-sm">Print Sheet</button>
+        </div>
+      </div>
+
+      <!-- Formula Cards Container (Placeholder List) -->
+      <div class="formula-cards-list" id="formulaCardsContainer">
+        
+        <!-- Reusable Scalable Formula Card Placeholder Component -->
+        <article class="formula-card" data-formula-id="math-alg-001">
+          <div class="formula-card-header">
+            <div>
+              <span class="badge badge-sm badge-outline">Algebra</span>
+              <h3 class="formula-card-title">Quadratic Formula Placeholder</h3>
+            </div>
+            <button class="btn-icon favorite-btn" aria-label="Bookmark Formula" data-id="math-alg-001">
+              ☆
+            </button>
+          </div>
+
+          <div class="formula-display-area">
+            <span class="formula-latex-text">x = [-b ± √(b² - 4ac)] / (2a)</span>
+          </div>
+
+          <p class="formula-description">
+            Calculates the solutions of a quadratic equation ax² + bx + c = 0.
+          </p>
+
+          <details class="formula-details">
+            <summary class="details-summary">Variables & Units Breakdown</summary>
+            <table class="variables-table">
+              <thead>
+                <tr>
+                  <th>Symbol</th>
+                  <th>Variable</th>
+                  <th>Unit</th>
+                  <th>Description</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td><code>a</code></td>
+                  <td>Quadratic Coefficient</td>
+                  <td>Dimensionless</td>
+                  <td>a ≠ 0</td>
+                </tr>
+                <tr>
+                  <td><code>b</code></td>
+                  <td>Linear Coefficient</td>
+                  <td>Dimensionless</td>
+                  <td>Coefficient of x</td>
+                </tr>
+                <tr>
+                  <td><code>c</code></td>
+                  <td>Constant</td>
+                  <td>Dimensionless</td>
+                  <td>y-intercept value</td>
+                </tr>
+              </tbody>
+            </table>
+          </details>
+
+          <div class="formula-card-footer">
+            <div class="tags-group">
+              <span class="tag tag-sm">Polynomials</span>
+              <span class="tag tag-sm">Roots</span>
+            </div>
+            <div class="card-actions">
+              <button class="btn btn-icon btn-sm" title="Copy Formula">📋</button>
+              <button class="btn btn-icon btn-sm" title="Share Formula">🔗</button>
+            </div>
+          </div>
+        </article>
+
+      </div>
+
+      <!-- Pagination Placeholder -->
+      <div class="pagination-wrapper">
+        <button class="btn btn-secondary btn-sm" disabled>Previous</button>
+        <span class="pagination-info">Page 1 of 1</span>
+        <button class="btn btn-secondary btn-sm" disabled>Next</button>
+      </div>
+
+    </main>
+  </div>
+
+  <script type="module" src="js/app.js"></script>
+</body>
+</html>

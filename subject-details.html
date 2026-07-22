@@ -1,0 +1,1151 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="light">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Subject Reference Hub — FormulaHub Cheat Sheet</title>
+    <!-- Internal CSS Stylesheet -->
+    <style>
+        /* ==========================================================================
+           1. DESIGN SYSTEM & CSS VARIABLES
+           ========================================================================== */
+        :root {
+            /* Colors - Light Mode */
+            --primary-hue: 220;
+            --primary: hsl(var(--primary-hue), 85%, 56%);
+            --primary-hover: hsl(var(--primary-hue), 85%, 48%);
+            --primary-light: hsl(var(--primary-hue), 85%, 96%);
+            --accent: hsl(260, 85%, 62%);
+            
+            --bg-body: #f8fafc;
+            --bg-surface: #ffffff;
+            --bg-surface-glass: rgba(255, 255, 255, 0.85);
+            --bg-subtle: #f1f5f9;
+            
+            --text-main: #0f172a;
+            --text-muted: #64748b;
+            --text-inverse: #ffffff;
+            
+            --border-color: #e2e8f0;
+            --border-hover: #cbd5e1;
+            
+            /* Shadows & Elevation */
+            --shadow-sm: 0 1px 3px rgba(0,0,0,0.05), 0 1px 2px rgba(0,0,0,0.1);
+            --shadow-md: 0 4px 12px -2px rgba(0,0,0,0.08), 0 2px 6px -1px rgba(0,0,0,0.04);
+            --shadow-lg: 0 12px 24px -4px rgba(0,0,0,0.1), 0 4px 8px -2px rgba(0,0,0,0.04);
+            --shadow-glow: 0 0 20px rgba(59, 130, 246, 0.25);
+            
+            /* Layout & Spacing */
+            --radius-sm: 8px;
+            --radius-md: 12px;
+            --radius-lg: 16px;
+            --radius-full: 9999px;
+            --max-width: 1280px;
+            --nav-height: 72px;
+            
+            /* Animations */
+            --transition-fast: 0.15s ease;
+            --transition-normal: 0.25s cubic-bezier(0.4, 0, 0.2, 1);
+            --transition-slow: 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+
+        /* Dark Theme Overrides */
+        [data-theme="dark"] {
+            --bg-body: #0b0f19;
+            --bg-surface: #151c2c;
+            --bg-surface-glass: rgba(21, 28, 44, 0.85);
+            --bg-subtle: #1e293b;
+            
+            --text-main: #f8fafc;
+            --text-muted: #94a3b8;
+            
+            --border-color: #1e293b;
+            --border-hover: #334155;
+            
+            --shadow-sm: 0 1px 3px rgba(0,0,0,0.3);
+            --shadow-md: 0 4px 12px rgba(0,0,0,0.4);
+            --shadow-lg: 0 12px 24px rgba(0,0,0,0.5);
+            --shadow-glow: 0 0 25px rgba(59, 130, 246, 0.35);
+        }
+
+        /* ==========================================================================
+           2. BASE RESETS & TYPOGRAPHY
+           ========================================================================== */
+        *, *::before, *::after {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        html {
+            scroll-behavior: smooth;
+            font-size: 16px;
+        }
+
+        body {
+            font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, sans-serif;
+            background-color: var(--bg-body);
+            color: var(--text-main);
+            line-height: 1.6;
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+            transition: background-color var(--transition-normal), color var(--transition-normal);
+            -webkit-font-smoothing: antialiased;
+        }
+
+        a {
+            color: inherit;
+            text-decoration: none;
+        }
+
+        button, input {
+            font: inherit;
+            border: none;
+            outline: none;
+            background: none;
+        }
+
+        /* Container Utility */
+        .container {
+            width: 100%;
+            max-width: var(--max-width);
+            margin: 0 auto;
+            padding: 0 1.5rem;
+        }
+
+        /* ==========================================================================
+           3. NAVIGATION BAR
+           ========================================================================== */
+        .navbar {
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+            height: var(--nav-height);
+            background-color: var(--bg-surface-glass);
+            backdrop-filter: blur(12px);
+            -webkit-backdrop-filter: blur(12px);
+            border-bottom: 1px solid var(--border-color);
+            transition: background-color var(--transition-normal), border-color var(--transition-normal);
+        }
+
+        .nav-container {
+            height: 100%;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+        }
+
+        .brand-logo {
+            display: flex;
+            align-items: center;
+            gap: 0.75rem;
+            font-size: 1.25rem;
+            font-weight: 700;
+            color: var(--text-main);
+            letter-spacing: -0.02em;
+        }
+
+        .logo-icon {
+            width: 38px;
+            height: 38px;
+            background: linear-gradient(135deg, var(--primary), var(--accent));
+            border-radius: var(--radius-md);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-weight: 800;
+            box-shadow: var(--shadow-sm);
+        }
+
+        .nav-links {
+            display: flex;
+            align-items: center;
+            gap: 1.5rem;
+            list-style: none;
+        }
+
+        .nav-link {
+            font-weight: 500;
+            color: var(--text-muted);
+            transition: color var(--transition-fast);
+            padding: 0.5rem 0.25rem;
+            position: relative;
+        }
+
+        .nav-link:hover, .nav-link.active {
+            color: var(--primary);
+        }
+
+        .nav-link.active::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 100%;
+            height: 2px;
+            background-color: var(--primary);
+            border-radius: var(--radius-full);
+        }
+
+        .nav-actions {
+            display: flex;
+            align-items: center;
+            gap: 0.75rem;
+        }
+
+        .icon-btn {
+            width: 40px;
+            height: 40px;
+            border-radius: var(--radius-md);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: var(--text-muted);
+            background-color: var(--bg-subtle);
+            cursor: pointer;
+            transition: all var(--transition-fast);
+        }
+
+        .icon-btn:hover {
+            color: var(--text-main);
+            background-color: var(--border-color);
+        }
+
+        .mobile-toggle {
+            display: none;
+        }
+
+        /* ==========================================================================
+           4. PAGE HEADER & BREADCRUMBS
+           ========================================================================== */
+        .page-header {
+            padding: 3rem 0 2rem;
+            border-bottom: 1px solid var(--border-color);
+            background-color: var(--bg-surface);
+            transition: background-color var(--transition-normal);
+        }
+
+        .breadcrumb {
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            font-size: 0.875rem;
+            color: var(--text-muted);
+            margin-bottom: 1.25rem;
+        }
+
+        .breadcrumb a:hover {
+            color: var(--primary);
+        }
+
+        .header-meta-row {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            gap: 1.5rem;
+            flex-wrap: wrap;
+        }
+
+        .subject-identity {
+            display: flex;
+            align-items: center;
+            gap: 1.25rem;
+        }
+
+        .subject-hero-icon {
+            width: 64px;
+            height: 64px;
+            border-radius: var(--radius-lg);
+            background-color: var(--primary-light);
+            color: var(--primary);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 2rem;
+            font-weight: 800;
+            flex-shrink: 0;
+        }
+
+        [data-theme="dark"] .subject-hero-icon {
+            background-color: rgba(59, 130, 246, 0.15);
+        }
+
+        .page-title {
+            font-size: 2.25rem;
+            font-weight: 800;
+            letter-spacing: -0.03em;
+            line-height: 1.2;
+        }
+
+        .page-subtitle {
+            font-size: 1rem;
+            color: var(--text-muted);
+            margin-top: 0.25rem;
+        }
+
+        /* Quick Action Toolbar */
+        .header-actions {
+            display: flex;
+            align-items: center;
+            gap: 0.75rem;
+        }
+
+        .btn {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.5rem;
+            padding: 0.6rem 1.25rem;
+            border-radius: var(--radius-md);
+            font-size: 0.875rem;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all var(--transition-fast);
+        }
+
+        .btn-outline {
+            border: 1px solid var(--border-color);
+            color: var(--text-main);
+            background-color: var(--bg-surface);
+        }
+
+        .btn-outline:hover {
+            border-color: var(--primary);
+            color: var(--primary);
+        }
+
+        .btn-primary {
+            background-color: var(--primary);
+            color: var(--text-inverse);
+        }
+
+        .btn-primary:hover {
+            background-color: var(--primary-hover);
+        }
+
+        /* ==========================================================================
+           5. DUAL-COLUMN LAYOUT (SIDEBAR + MAIN CONTENT)
+           ========================================================================== */
+        .details-wrapper {
+            padding: 2.5rem 0 4rem;
+        }
+
+        .layout-grid {
+            display: grid;
+            grid-template-columns: 280px 1fr;
+            gap: 2.5rem;
+            align-items: start;
+        }
+
+        /* Sticky Sidebar Navigation */
+        .sidebar {
+            position: sticky;
+            top: calc(var(--nav-height) + 1.5rem);
+            background-color: var(--bg-surface);
+            border: 1px solid var(--border-color);
+            border-radius: var(--radius-lg);
+            padding: 1.25rem;
+            box-shadow: var(--shadow-sm);
+        }
+
+        .sidebar-title {
+            font-size: 0.85rem;
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 0.05em;
+            color: var(--text-muted);
+            margin-bottom: 1rem;
+            padding-bottom: 0.5rem;
+            border-bottom: 1px solid var(--border-color);
+        }
+
+        .topic-nav {
+            list-style: none;
+            display: flex;
+            flex-direction: column;
+            gap: 0.25rem;
+        }
+
+        .topic-nav-item a {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding: 0.6rem 0.875rem;
+            border-radius: var(--radius-md);
+            font-size: 0.9rem;
+            font-weight: 500;
+            color: var(--text-muted);
+            transition: all var(--transition-fast);
+        }
+
+        .topic-nav-item a:hover {
+            color: var(--primary);
+            background-color: var(--bg-subtle);
+        }
+
+        .topic-nav-item.active a {
+            color: var(--primary);
+            background-color: var(--primary-light);
+            font-weight: 700;
+        }
+
+        [data-theme="dark"] .topic-nav-item.active a {
+            background-color: rgba(59, 130, 246, 0.15);
+        }
+
+        .topic-count {
+            font-size: 0.75rem;
+            padding: 0.15rem 0.5rem;
+            border-radius: var(--radius-full);
+            background-color: var(--bg-subtle);
+            color: var(--text-muted);
+        }
+
+        /* Main Content Cards & Formula Blocks */
+        .content-area {
+            display: flex;
+            flex-direction: column;
+            gap: 2.5rem;
+        }
+
+        .topic-section {
+            scroll-margin-top: calc(var(--nav-height) + 1.5rem);
+        }
+
+        .topic-header {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            margin-bottom: 1.25rem;
+            padding-bottom: 0.75rem;
+            border-bottom: 2px solid var(--border-color);
+        }
+
+        .topic-title {
+            font-size: 1.5rem;
+            font-weight: 700;
+            color: var(--text-main);
+        }
+
+        .formula-cards-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
+            gap: 1.5rem;
+        }
+
+        /* Formula Card Design */
+        .formula-card {
+            background-color: var(--bg-surface);
+            border: 1px solid var(--border-color);
+            border-radius: var(--radius-lg);
+            padding: 1.5rem;
+            transition: all var(--transition-normal);
+            display: flex;
+            flex-direction: column;
+            position: relative;
+        }
+
+        .formula-card:hover {
+            box-shadow: var(--shadow-md);
+            border-color: var(--border-hover);
+        }
+
+        .card-top {
+            display: flex;
+            align-items: flex-start;
+            justify-content: space-between;
+            gap: 1rem;
+            margin-bottom: 0.75rem;
+        }
+
+        .formula-name {
+            font-size: 1.1rem;
+            font-weight: 700;
+            color: var(--text-main);
+        }
+
+        .fav-btn {
+            color: var(--text-muted);
+            cursor: pointer;
+            transition: color var(--transition-fast);
+            background: none;
+            border: none;
+            padding: 0.25rem;
+        }
+
+        .fav-btn:hover, .fav-btn.is-active {
+            color: #f59e0b; /* Amber/Gold star */
+        }
+
+        .formula-description {
+            font-size: 0.875rem;
+            color: var(--text-muted);
+            margin-bottom: 1.25rem;
+        }
+
+        /* Formula Box Container */
+        .formula-box {
+            background-color: var(--bg-subtle);
+            border-radius: var(--radius-md);
+            padding: 1.25rem;
+            text-align: center;
+            margin-bottom: 1.25rem;
+            border: 1px solid var(--border-color);
+            position: relative;
+        }
+
+        .formula-expression {
+            font-family: 'Courier New', Courier, monospace;
+            font-size: 1.2rem;
+            font-weight: 700;
+            color: var(--text-main);
+            letter-spacing: 0.02em;
+            word-break: break-all;
+        }
+
+        /* Variable Definitions List */
+        .variable-list {
+            font-size: 0.825rem;
+            color: var(--text-muted);
+            display: flex;
+            flex-direction: column;
+            gap: 0.35rem;
+            margin-bottom: 1.25rem;
+            padding-left: 0.5rem;
+            border-left: 2px solid var(--primary);
+        }
+
+        .variable-item strong {
+            color: var(--text-main);
+        }
+
+        .card-actions {
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            margin-top: auto;
+            padding-top: 1rem;
+            border-top: 1px solid var(--border-color);
+        }
+
+        .btn-sm {
+            padding: 0.4rem 0.75rem;
+            font-size: 0.8rem;
+            border-radius: var(--radius-sm);
+        }
+
+        /* Direct Interactive Copy Feedback */
+        .toast {
+            position: fixed;
+            bottom: 2rem;
+            right: 2rem;
+            background-color: var(--text-main);
+            color: var(--bg-body);
+            padding: 0.75rem 1.5rem;
+            border-radius: var(--radius-md);
+            font-size: 0.875rem;
+            font-weight: 600;
+            box-shadow: var(--shadow-lg);
+            display: none;
+            z-index: 2000;
+            animation: fadeIn 0.3s ease;
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(10px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        /* ==========================================================================
+           6. FOOTER SECTION
+           ========================================================================== */
+        .footer {
+            background-color: var(--bg-surface);
+            border-top: 1px solid var(--border-color);
+            padding: 4rem 0 2rem;
+            margin-top: auto;
+            transition: background-color var(--transition-normal);
+        }
+
+        .footer-grid {
+            display: grid;
+            grid-template-columns: 2fr repeat(3, 1fr);
+            gap: 3rem;
+            margin-bottom: 3rem;
+        }
+
+        .footer-brand p {
+            color: var(--text-muted);
+            font-size: 0.9rem;
+            margin-top: 1rem;
+            max-width: 300px;
+        }
+
+        .footer-column-title {
+            font-size: 0.95rem;
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 0.05em;
+            margin-bottom: 1.25rem;
+        }
+
+        .footer-links {
+            list-style: none;
+            display: flex;
+            flex-direction: column;
+            gap: 0.75rem;
+        }
+
+        .footer-link {
+            color: var(--text-muted);
+            font-size: 0.9rem;
+            transition: color var(--transition-fast);
+        }
+
+        .footer-link:hover {
+            color: var(--primary);
+        }
+
+        .footer-bottom {
+            padding-top: 2rem;
+            border-top: 1px solid var(--border-color);
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            font-size: 0.875rem;
+            color: var(--text-muted);
+        }
+
+        /* ==========================================================================
+           7. RESPONSIVE MEDIA QUERIES
+           ========================================================================== */
+        @media (max-width: 992px) {
+            .layout-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .sidebar {
+                position: relative;
+                top: 0;
+            }
+
+            .footer-grid {
+                grid-template-columns: 1fr 1fr;
+                gap: 2rem;
+            }
+        }
+
+        @media (max-width: 768px) {
+            .page-title {
+                font-size: 1.75rem;
+            }
+
+            .nav-links {
+                position: fixed;
+                top: var(--nav-height);
+                left: 0;
+                right: 0;
+                background-color: var(--bg-surface);
+                border-bottom: 1px solid var(--border-color);
+                flex-direction: column;
+                padding: 1.5rem;
+                gap: 1rem;
+                display: none;
+                box-shadow: var(--shadow-lg);
+            }
+
+            .nav-links.is-active {
+                display: flex;
+            }
+
+            .mobile-toggle {
+                display: flex;
+            }
+
+            .header-meta-row {
+                flex-direction: column;
+                align-items: flex-start;
+            }
+
+            .header-actions {
+                width: 100%;
+            }
+
+            .header-actions .btn {
+                flex: 1;
+                justify-content: center;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .footer-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .footer-bottom {
+                flex-direction: column;
+                gap: 1rem;
+                text-align: center;
+            }
+            
+            .formula-cards-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
+</head>
+<body>
+
+    <!-- ==========================================================================
+       NAVIGATION BAR
+       ========================================================================== -->
+    <nav class="navbar" aria-label="Main Navigation">
+        <div class="container nav-container">
+            <a href="index.html" class="brand-logo" aria-label="FormulaHub Home">
+                <div class="logo-icon">ƒx</div>
+                <span>FormulaHub</span>
+            </a>
+
+            <!-- Navigation Links -->
+            <ul class="nav-links" id="navLinks">
+                <li><a href="index.html" class="nav-link">Home</a></li>
+                <li><a href="subjects.html" class="nav-link active">Subjects</a></li>
+                <li><a href="calculators.html" class="nav-link">Calculators</a></li>
+                <li><a href="converter.html" class="nav-link">Converter</a></li>
+                <li><a href="constants.html" class="nav-link">Constants</a></li>
+                <li><a href="symbols.html" class="nav-link">Symbols</a></li>
+            </ul>
+
+            <!-- Header Action Controls -->
+            <div class="nav-actions">
+                <!-- Theme Toggle Button -->
+                <button class="icon-btn" id="themeToggleBtn" aria-label="Toggle Theme" title="Toggle Dark/Light Mode">
+                    <svg id="sunIcon" width="20" height="20" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M12 3v1m0 16v1m9-9h-1M4 12H3m15.364 6.364l-.707-.707M6.343 6.343l-.707-.707m12.728 0l-.707.707M6.343 17.657l-.707.707M16 12a4 4 0 11-8 0 4 4 0 018 0z"></path></svg>
+                    <svg id="moonIcon" width="20" height="20" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24" style="display:none;"><path d="M20.354 15.354A9 9 0 018.646 3.646 9.003 9.003 0 0012 21a9.003 9.003 0 008.354-5.646z"></path></svg>
+                </button>
+
+                <!-- Search Link Button -->
+                <a href="search.html" class="icon-btn" aria-label="Search Formulas">
+                    <svg width="20" height="20" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"></path></svg>
+                </a>
+
+                <!-- Mobile Navigation Toggle -->
+                <button class="icon-btn mobile-toggle" id="mobileMenuBtn" aria-label="Toggle Navigation Menu">
+                    <svg width="20" height="20" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M4 6h16M4 12h16M4 18h16"></path></svg>
+                </button>
+            </div>
+        </div>
+    </nav>
+
+    <!-- ==========================================================================
+       PAGE HEADER
+       ========================================================================== -->
+    <header class="page-header">
+        <div class="container">
+            <div class="breadcrumb">
+                <a href="index.html">Home</a>
+                <span>/</span>
+                <a href="subjects.html">Subjects</a>
+                <span>/</span>
+                <span id="breadcrumbSubject" style="color: var(--text-main);">Mathematics</span>
+            </div>
+
+            <div class="header-meta-row">
+                <div class="subject-identity">
+                    <div class="subject-hero-icon" id="subjectIcon">∑</div>
+                    <div>
+                        <h1 class="page-title" id="subjectTitle">Mathematics Reference</h1>
+                        <p class="page-subtitle" id="subjectDesc">Comprehensive formula reference sheet and variable guides for core mathematical topics.</p>
+                    </div>
+                </div>
+
+                <div class="header-actions">
+                    <a href="calculators.html" class="btn btn-outline">
+                        <svg width="16" height="16" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M9 7h6m-6 4h6m-6 4h6M6 20h12a2 2 0 002-2V6a2 2 0 00-2-2H6a2 2 0 00-2 2v12a2 2 0 002 2z"></path></svg>
+                        Calculators
+                    </a>
+                    <a href="favorites.html" class="btn btn-primary">
+                        <svg width="16" height="16" fill="currentColor" viewBox="0 0 24 24"><path d="M12 17.27L18.18 21l-1.64-7.03L22 9.24l-7.19-.61L12 2 9.19 8.63 2 9.24l5.46 4.73L5.82 21z"></path></svg>
+                        Saved Formulas
+                    </a>
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <!-- ==========================================================================
+       MAIN CONTENT - DUAL COLUMN LAYOUT
+       ========================================================================== -->
+    <main class="details-wrapper">
+        <div class="container layout-grid">
+
+            <!-- Sticky Sidebar Topic Navigation -->
+            <aside class="sidebar">
+                <h3 class="sidebar-title">Topic Sections</h3>
+                <ul class="topic-nav" id="topicNav">
+                    <li class="topic-nav-item active"><a href="#algebra">Algebra <span class="topic-count">2</span></a></li>
+                    <li class="topic-nav-item"><a href="#calculus">Calculus <span class="topic-count">2</span></a></li>
+                    <li class="topic-nav-item"><a href="#trigonometry">Trigonometry <span class="topic-count">1</span></a></li>
+                    <li class="topic-nav-item"><a href="#geometry">Geometry <span class="topic-count">1</span></a></li>
+                </ul>
+            </aside>
+
+            <!-- Topic Sections & Formulas -->
+            <div class="content-area" id="contentArea">
+
+                <!-- TOPIC SECTION 1: ALGEBRA -->
+                <section class="topic-section" id="algebra">
+                    <div class="topic-header">
+                        <h2 class="topic-title">Algebra</h2>
+                    </div>
+
+                    <div class="formula-cards-grid">
+                        <!-- Formula 1 -->
+                        <div class="formula-card">
+                            <div class="card-top">
+                                <h3 class="formula-name">Quadratic Formula</h3>
+                                <button class="fav-btn" title="Save to Favorites" data-id="math-quadratic">★</button>
+                            </div>
+                            <p class="formula-description">Finds the roots of a standard quadratic equation ax² + bx + c = 0.</p>
+                            
+                            <div class="formula-box">
+                                <div class="formula-expression">x = (-b ± √(b² - 4ac)) / (2a)</div>
+                            </div>
+
+                            <div class="variable-list">
+                                <div class="variable-item"><strong>x:</strong> Unknown Roots</div>
+                                <div class="variable-item"><strong>a, b, c:</strong> Coefficients (a ≠ 0)</div>
+                            </div>
+
+                            <div class="card-actions">
+                                <button class="btn btn-outline btn-sm copy-btn" data-formula="x = (-b ± √(b² - 4ac)) / (2a)">Copy Expression</button>
+                                <a href="calculators.html" class="btn btn-primary btn-sm">Solve in Calculator</a>
+                            </div>
+                        </div>
+
+                        <!-- Formula 2 -->
+                        <div class="formula-card">
+                            <div class="card-top">
+                                <h3 class="formula-name">Logarithm Change of Base</h3>
+                                <button class="fav-btn" title="Save to Favorites" data-id="math-log-base">★</button>
+                            </div>
+                            <p class="formula-description">Converts a logarithm from base b to a new arbitrary base k.</p>
+                            
+                            <div class="formula-box">
+                                <div class="formula-expression">log_b(x) = log_k(x) / log_k(b)</div>
+                            </div>
+
+                            <div class="variable-list">
+                                <div class="variable-item"><strong>b:</strong> Original Base</div>
+                                <div class="variable-item"><strong>k:</strong> Target Base</div>
+                                <div class="variable-item"><strong>x:</strong> Value</div>
+                            </div>
+
+                            <div class="card-actions">
+                                <button class="btn btn-outline btn-sm copy-btn" data-formula="log_b(x) = log_k(x) / log_k(b)">Copy Expression</button>
+                                <a href="calculators.html" class="btn btn-primary btn-sm">Solve in Calculator</a>
+                            </div>
+                        </div>
+                    </div>
+                </section>
+
+                <!-- TOPIC SECTION 2: CALCULUS -->
+                <section class="topic-section" id="calculus">
+                    <div class="topic-header">
+                        <h2 class="topic-title">Calculus</h2>
+                    </div>
+
+                    <div class="formula-cards-grid">
+                        <!-- Formula 3 -->
+                        <div class="formula-card">
+                            <div class="card-top">
+                                <h3 class="formula-name">Power Rule of Differentiation</h3>
+                                <button class="fav-btn" title="Save to Favorites" data-id="math-power-rule">★</button>
+                            </div>
+                            <p class="formula-description">Derivative of a variable raised to a constant real power n.</p>
+                            
+                            <div class="formula-box">
+                                <div class="formula-expression">(d/dx)[xⁿ] = n · xⁿ⁻¹</div>
+                            </div>
+
+                            <div class="variable-list">
+                                <div class="variable-item"><strong>x:</strong> Independent Variable</div>
+                                <div class="variable-item"><strong>n:</strong> Constant Exponent</div>
+                            </div>
+
+                            <div class="card-actions">
+                                <button class="btn btn-outline btn-sm copy-btn" data-formula="(d/dx)[x^n] = n * x^(n-1)">Copy Expression</button>
+                                <a href="calculators.html" class="btn btn-primary btn-sm">Solve in Calculator</a>
+                            </div>
+                        </div>
+
+                        <!-- Formula 4 -->
+                        <div class="formula-card">
+                            <div class="card-top">
+                                <h3 class="formula-name">Fundamental Theorem of Calculus</h3>
+                                <button class="fav-btn" title="Save to Favorites" data-id="math-ftc">★</button>
+                            </div>
+                            <p class="formula-description">Relates definite integration with antiderivatives.</p>
+                            
+                            <div class="formula-box">
+                                <div class="formula-expression">∫[a to b] f(x) dx = F(b) - F(a)</div>
+                            </div>
+
+                            <div class="variable-list">
+                                <div class="variable-item"><strong>F(x):</strong> Antiderivative of f(x)</div>
+                                <div class="variable-item"><strong>a, b:</strong> Limits of Integration</div>
+                            </div>
+
+                            <div class="card-actions">
+                                <button class="btn btn-outline btn-sm copy-btn" data-formula="∫[a to b] f(x) dx = F(b) - F(a)">Copy Expression</button>
+                                <a href="calculators.html" class="btn btn-primary btn-sm">Solve in Calculator</a>
+                            </div>
+                        </div>
+                    </div>
+                </section>
+
+                <!-- TOPIC SECTION 3: TRIGONOMETRY -->
+                <section class="topic-section" id="trigonometry">
+                    <div class="topic-header">
+                        <h2 class="topic-title">Trigonometry</h2>
+                    </div>
+
+                    <div class="formula-cards-grid">
+                        <!-- Formula 5 -->
+                        <div class="formula-card">
+                            <div class="card-top">
+                                <h3 class="formula-name">Pythagorean Identity</h3>
+                                <button class="fav-btn" title="Save to Favorites" data-id="math-pythagorean-trig">★</button>
+                            </div>
+                            <p class="formula-description">Fundamental relationship between sine and cosine for any angle.</p>
+                            
+                            <div class="formula-box">
+                                <div class="formula-expression">sin²(θ) + cos²(θ) = 1</div>
+                            </div>
+
+                            <div class="variable-list">
+                                <div class="variable-item"><strong>θ:</strong> Angle (Radians or Degrees)</div>
+                            </div>
+
+                            <div class="card-actions">
+                                <button class="btn btn-outline btn-sm copy-btn" data-formula="sin^2(θ) + cos^2(θ) = 1">Copy Expression</button>
+                                <a href="calculators.html" class="btn btn-primary btn-sm">Solve in Calculator</a>
+                            </div>
+                        </div>
+                    </div>
+                </section>
+
+                <!-- TOPIC SECTION 4: GEOMETRY -->
+                <section class="topic-section" id="geometry">
+                    <div class="topic-header">
+                        <h2 class="topic-title">Geometry</h2>
+                    </div>
+
+                    <div class="formula-cards-grid">
+                        <!-- Formula 6 -->
+                        <div class="formula-card">
+                            <div class="card-top">
+                                <h3 class="formula-name">Sphere Volume</h3>
+                                <button class="fav-btn" title="Save to Favorites" data-id="math-sphere-volume">★</button>
+                            </div>
+                            <p class="formula-description">Calculates total 3D enclosed volume of a perfect sphere.</p>
+                            
+                            <div class="formula-box">
+                                <div class="formula-expression">V = (4/3) · π · r³</div>
+                            </div>
+
+                            <div class="variable-list">
+                                <div class="variable-item"><strong>V:</strong> Enclosed Volume</div>
+                                <div class="variable-item"><strong>r:</strong> Radius</div>
+                            </div>
+
+                            <div class="card-actions">
+                                <button class="btn btn-outline btn-sm copy-btn" data-formula="V = (4/3) * π * r^3">Copy Expression</button>
+                                <a href="calculators.html" class="btn btn-primary btn-sm">Solve in Calculator</a>
+                            </div>
+                        </div>
+                    </div>
+                </section>
+
+            </div>
+        </div>
+    </main>
+
+    <!-- Toast Copy Feedback Popup -->
+    <div class="toast" id="toastMessage">Formula expression copied to clipboard!</div>
+
+    <!-- ==========================================================================
+       FOOTER SECTION
+       ========================================================================== -->
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-grid">
+                <!-- Brand Info -->
+                <div class="footer-brand">
+                    <a href="index.html" class="brand-logo">
+                        <div class="logo-icon">ƒx</div>
+                        <span>FormulaHub</span>
+                    </a>
+                    <p>A comprehensive, lightweight, open-source formula reference system designed for high performance and accessibility.</p>
+                </div>
+
+                <!-- Navigation Column 1 -->
+                <div>
+                    <h4 class="footer-column-title">Reference</h4>
+                    <ul class="footer-links">
+                        <li><a href="subjects.html" class="footer-link">All Subjects</a></li>
+                        <li><a href="constants.html" class="footer-link">Physical Constants</a></li>
+                        <li><a href="symbols.html" class="footer-link">Greek Symbols</a></li>
+                        <li><a href="favorites.html" class="footer-link">Saved Formulas</a></li>
+                    </ul>
+                </div>
+
+                <!-- Navigation Column 2 -->
+                <div>
+                    <h4 class="footer-column-title">Tools</h4>
+                    <ul class="footer-links">
+                        <li><a href="calculators.html" class="footer-link">Calculators</a></li>
+                        <li><a href="converter.html" class="footer-link">Unit Converter</a></li>
+                        <li><a href="search.html" class="footer-link">Advanced Search</a></li>
+                        <li><a href="recent.html" class="footer-link">Recent Updates</a></li>
+                    </ul>
+                </div>
+
+                <!-- Navigation Column 3 -->
+                <div>
+                    <h4 class="footer-column-title">Platform</h4>
+                    <ul class="footer-links">
+                        <li><a href="about.html" class="footer-link">About Project</a></li>
+                        <li><a href="contact.html" class="footer-link">Contact & Feedback</a></li>
+                        <li><a href="settings.html" class="footer-link">Preferences</a></li>
+                        <li><a href="privacy.html" class="footer-link">Privacy Policy</a></li>
+                        <li><a href="terms.html" class="footer-link">Terms of Use</a></li>
+                    </ul>
+                </div>
+            </div>
+
+            <!-- Footer Bottom Bar -->
+            <div class="footer-bottom">
+                <p>&copy; 2026 FormulaHub. Built with Vanilla Web Standards.</p>
+                <p>Designed for speed, clarity, and precision.</p>
+            </div>
+        </div>
+    </footer>
+
+    <!-- ==========================================================================
+       JAVASCRIPT LOGIC
+       ========================================================================== -->
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            // Theme Toggle Logic
+            const themeToggleBtn = document.getElementById('themeToggleBtn');
+            const sunIcon = document.getElementById('sunIcon');
+            const moonIcon = document.getElementById('moonIcon');
+            const htmlElement = document.documentElement;
+
+            const savedTheme = localStorage.getItem('formulahub_theme');
+            const systemPrefersDark = window.matchMedia('(prefers-color-scheme: dark)').matches;
+            
+            const currentTheme = savedTheme || (systemPrefersDark ? 'dark' : 'light');
+            applyTheme(currentTheme);
+
+            themeToggleBtn.addEventListener('click', () => {
+                const activeTheme = htmlElement.getAttribute('data-theme');
+                const newTheme = activeTheme === 'dark' ? 'light' : 'dark';
+                applyTheme(newTheme);
+            });
+
+            function applyTheme(theme) {
+                htmlElement.setAttribute('data-theme', theme);
+                localStorage.setItem('formulahub_theme', theme);
+
+                if (theme === 'dark') {
+                    sunIcon.style.display = 'none';
+                    moonIcon.style.display = 'block';
+                } else {
+                    sunIcon.style.display = 'block';
+                    moonIcon.style.display = 'none';
+                }
+            }
+
+            // Mobile Navigation Toggle
+            const mobileMenuBtn = document.getElementById('mobileMenuBtn');
+            const navLinks = document.getElementById('navLinks');
+
+            mobileMenuBtn.addEventListener('click', () => {
+                navLinks.classList.toggle('is-active');
+            });
+
+            document.addEventListener('click', (event) => {
+                if (!event.target.closest('.navbar')) {
+                    navLinks.classList.remove('is-active');
+                }
+            });
+
+            // Parse URL Query Parameters to dynamically adjust title/icon
+            const urlParams = new URLSearchParams(window.location.search);
+            const subjectParam = urlParams.get('subject');
+
+            if (subjectParam) {
+                const formattedName = subjectParam.charAt(0).toUpperCase() + subjectParam.slice(1);
+                document.getElementById('breadcrumbSubject').textContent = formattedName;
+                document.getElementById('subjectTitle').textContent = `${formattedName} Reference`;
+            }
+
+            // Copy Formula Expression Handler
+            const copyButtons = document.querySelectorAll('.copy-btn');
+            const toast = document.getElementById('toastMessage');
+
+            copyButtons.forEach(btn => {
+                btn.addEventListener('click', () => {
+                    const formulaText = btn.getAttribute('data-formula');
+                    navigator.clipboard.writeText(formulaText).then(() => {
+                        showToast('Formula expression copied!');
+                    });
+                });
+            });
+
+            function showToast(message) {
+                toast.textContent = message;
+                toast.style.display = 'block';
+                setTimeout(() => {
+                    toast.style.display = 'none';
+                }, 2500);
+            }
+
+            // Favorites Star Toggle State (Persisted in localStorage)
+            const favButtons = document.querySelectorAll('.fav-btn');
+            let savedFavs = JSON.parse(localStorage.getItem('formulahub_favorites') || '[]');
+
+            favButtons.forEach(btn => {
+                const id = btn.getAttribute('data-id');
+                if (savedFavs.includes(id)) {
+                    btn.classList.add('is-active');
+                }
+
+                btn.addEventListener('click', () => {
+                    btn.classList.toggle('is-active');
+                    if (btn.classList.contains('is-active')) {
+                        if (!savedFavs.includes(id)) savedFavs.push(id);
+                        showToast('Saved to Favorites!');
+                    } else {
+                        savedFavs = savedFavs.filter(favId => favId !== id);
+                        showToast('Removed from Favorites');
+                    }
+                    localStorage.setItem('formulahub_favorites', JSON.stringify(savedFavs));
+                });
+            });
+
+            // Smooth Scroll Active Highlight Sidebar Links
+            const sidebarLinks = document.querySelectorAll('.topic-nav-item');
+            sidebarLinks.forEach(item => {
+                item.addEventListener('click', () => {
+                    sidebarLinks.forEach(link => link.classList.remove('active'));
+                    item.classList.add('active');
+                });
+            });
+        });
+    </script>
+</body>
+</html>

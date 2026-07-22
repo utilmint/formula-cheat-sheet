@@ -1,0 +1,196 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="system">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Utilmint — Universal Formula Cheat Sheet Platform</title>
+  <meta name="description" content="The ultimate formula cheat sheet for Mathematics, Physics, Chemistry, Engineering, Finance, and Computer Science.">
+  
+  <!-- Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+  
+  <!-- Stylesheets -->
+  <link rel="stylesheet" href="css/variables.css">
+  <link rel="stylesheet" href="css/style.css">
+  <link rel="stylesheet" href="css/navbar.css">
+  <link rel="stylesheet" href="css/cards.css">
+  <link rel="stylesheet" href="css/buttons.css">
+  <link rel="stylesheet" href="css/forms.css">
+  <link rel="stylesheet" href="css/footer.css">
+  <link rel="stylesheet" href="css/darkmode.css">
+  <link rel="stylesheet" href="css/responsive.css">
+</head>
+<body>
+
+  <!-- Sticky Top Navbar -->
+  <header class="navbar-wrapper">
+    <nav class="navbar" aria-label="Main Navigation">
+      <a href="index.html" class="brand">
+        <span class="brand-logo">⚡</span>
+        <span class="brand-name">Utilmint</span>
+      </a>
+
+      <div class="nav-menu" id="navMenu">
+        <a href="index.html" class="nav-link active">Home</a>
+        <a href="subjects.html" class="nav-link">Subjects</a>
+        <a href="search.html" class="nav-link">Search</a>
+        <a href="calculators.html" class="nav-link">Calculators</a>
+        <a href="converter.html" class="nav-link">Converter</a>
+        <a href="constants.html" class="nav-link">Constants</a>
+        <a href="symbols.html" class="nav-link">Symbols</a>
+        <a href="favorites.html" class="nav-link">Favorites</a>
+      </div>
+
+      <div class="nav-actions">
+        <button id="themeToggleBtn" class="btn-icon" aria-label="Toggle Theme">
+          <span class="theme-icon">🌙</span>
+        </button>
+        <button class="hamburger-menu" id="hamburgerBtn" aria-label="Toggle Navigation Menu">
+          <span></span>
+          <span></span>
+          <span></span>
+        </button>
+      </div>
+    </nav>
+  </header>
+
+  <!-- Main Content Container -->
+  <main id="main-content">
+    
+    <!-- Hero Section -->
+    <section class="hero-section">
+      <div class="container hero-content">
+        <span class="badge badge-primary">Phase 1 — Framework Ready</span>
+        <h1 class="hero-title">The Universal Formula Engine</h1>
+        <p class="hero-subtitle">Instant access to thousands of formulas across Science, Engineering, Mathematics, and Finance.</p>
+
+        <!-- Search Bar Component -->
+        <form action="search.html" method="GET" class="hero-search-form">
+          <div class="search-input-wrapper">
+            <span class="search-icon">🔍</span>
+            <input type="search" name="q" placeholder="Search formulas, variables, topics, or subjects..." autocomplete="off">
+            <button type="submit" class="btn btn-primary">Search</button>
+          </div>
+        </form>
+
+        <div class="quick-tags">
+          <span>Popular:</span>
+          <a href="search.html?q=Quadratic" class="tag">Quadratic Formula</a>
+          <a href="search.html?q=Thermodynamics" class="tag">Thermodynamics</a>
+          <a href="search.html?q=Ohm's Law" class="tag">Ohm's Law</a>
+          <a href="search.html?q=Integration" class="tag">Integration</a>
+        </div>
+      </div>
+    </section>
+
+    <!-- Formula of the Day Placeholder -->
+    <section class="section-padding container">
+      <div class="card card-featured">
+        <div class="card-header-flex">
+          <span class="badge badge-accent">Formula of the Day</span>
+          <span class="text-muted text-sm">Updated Daily</span>
+        </div>
+        <div class="card-body">
+          <h3 class="card-title">Euler's Identity Placeholder</h3>
+          <div class="formula-preview-box">
+            <code>e^(iπ) + 1 = 0</code>
+          </div>
+          <p class="text-muted">Connecting five fundamental mathematical constants in one single equation.</p>
+        </div>
+        <div class="card-footer">
+          <a href="subject-detail.html?id=math" class="btn btn-secondary btn-sm">Explore Mathematics</a>
+        </div>
+      </div>
+    </section>
+
+    <!-- Popular Subjects Grid -->
+    <section class="section-padding bg-subtle">
+      <div class="container">
+        <div class="section-header">
+          <h2>Browse Popular Subjects</h2>
+          <a href="subjects.html" class="link-primary">View All Subjects →</a>
+        </div>
+
+        <div class="grid grid-3" id="popularSubjectsGrid">
+          <!-- Dynamic JS subject cards render here -->
+          <div class="skeleton-card"></div>
+          <div class="skeleton-card"></div>
+          <div class="skeleton-card"></div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Statistics Section -->
+    <section class="section-padding container">
+      <div class="grid grid-4 text-center">
+        <div class="stat-card">
+          <h3 class="stat-number">12+</h3>
+          <p class="stat-label">Core Fields</p>
+        </div>
+        <div class="stat-card">
+          <h3 class="stat-number">100%</h3>
+          <p class="stat-label">Offline Ready</p>
+        </div>
+        <div class="stat-card">
+          <h3 class="stat-number">0ms</h3>
+          <p class="stat-label">Backend Latency</p>
+        </div>
+        <div class="stat-card">
+          <h3 class="stat-number">⚡</h3>
+          <p class="stat-label">Client-Side Search</p>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <!-- Global Footer -->
+  <footer class="footer">
+    <div class="container footer-grid">
+      <div class="footer-brand">
+        <a href="index.html" class="brand">⚡ Utilmint</a>
+        <p class="text-sm text-muted">The ultimate multi-subject formula cheat sheet engine built for speed, scale, and accessibility.</p>
+      </div>
+
+      <div class="footer-col">
+        <h4>Navigation</h4>
+        <ul>
+          <li><a href="subjects.html">Subjects</a></li>
+          <li><a href="calculators.html">Calculators</a></li>
+          <li><a href="converter.html">Unit Converter</a></li>
+          <li><a href="constants.html">Constants</a></li>
+        </ul>
+      </div>
+
+      <div class="footer-col">
+        <h4>Tools</h4>
+        <ul>
+          <li><a href="symbols.html">Symbols Dictionary</a></li>
+          <li><a href="favorites.html">Favorites</a></li>
+          <li><a href="recent.html">Recent History</a></li>
+          <li><a href="search.html">Advanced Search</a></li>
+        </ul>
+      </div>
+
+      <div class="footer-col">
+        <h4>Legal & Project</h4>
+        <ul>
+          <li><a href="about.html">About Utilmint</a></li>
+          <li><a href="contact.html">Contact Us</a></li>
+          <li><a href="privacy.html">Privacy Policy</a></li>
+          <li><a href="terms.html">Terms of Service</a></li>
+        </ul>
+      </div>
+    </div>
+
+    <div class="footer-bottom container">
+      <p class="text-sm text-muted">&copy; 2026 Utilmint. Phase 1 Architecture. All Rights Reserved.</p>
+      <span class="text-sm text-muted">Version 1.0.0-p1</span>
+    </div>
+  </footer>
+
+  <!-- Core JavaScript Modules -->
+  <script type="module" src="js/app.js"></script>
+</body>
+</html>
